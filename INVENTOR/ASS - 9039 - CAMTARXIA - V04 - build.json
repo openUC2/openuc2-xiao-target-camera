@@ -1,0 +1,2298 @@
+{
+ "parameters": [
+  {
+   "name": "cube_half",
+   "value": 24.9,
+   "unit": "mm",
+   "expr": "",
+   "comment": "cube body half size"
+  },
+  {
+   "name": "cham_sum",
+   "value": 38.0,
+   "unit": "mm",
+   "expr": "",
+   "comment": "45 deg edge chamfers lie on |a| + |b| = cham_sum"
+  },
+  {
+   "name": "throat",
+   "value": 17.03,
+   "unit": "mm",
+   "expr": "",
+   "comment": "half width of the port throat (walls +-17.03)"
+  },
+  {
+   "name": "throat_z0",
+   "value": 20.97,
+   "unit": "mm",
+   "expr": "",
+   "comment": "inner end of the throat, where the chamfer starts"
+  },
+  {
+   "name": "cham_x1",
+   "value": 21.0,
+   "unit": "mm",
+   "expr": "",
+   "comment": "other end of the chamfer"
+  },
+  {
+   "name": "notch_x",
+   "value": 17.92,
+   "unit": "mm",
+   "expr": "",
+   "comment": "the notches cut the chamfer back to here (top and bottom ports, x walls only)"
+  },
+  {
+   "name": "puz_t",
+   "value": 5.0,
+   "unit": "mm",
+   "expr": "",
+   "comment": "PUZ11 puzzle piece on top of the cube"
+  },
+  {
+   "name": "puz_half",
+   "value": 17.25,
+   "unit": "mm",
+   "expr": "",
+   "comment": "PUZ11 opening half width"
+  },
+  {
+   "name": "puz_cor",
+   "value": 2.0,
+   "unit": "mm",
+   "expr": "",
+   "comment": "PUZ11 opening corner chamfer"
+  },
+  {
+   "name": "cam_bx",
+   "value": 8.75,
+   "unit": "mm",
+   "expr": "",
+   "comment": "camera axis in the vendor frame (bx, bz)"
+  },
+  {
+   "name": "cam_bz",
+   "value": -6.75,
+   "unit": "mm",
+   "expr": "",
+   "comment": ""
+  },
+  {
+   "name": "sensor_by",
+   "value": 8.6,
+   "unit": "mm",
+   "expr": "",
+   "comment": "sensor plane (ASSUMED: module back 7.95 + 0.65) - measure"
+  },
+  {
+   "name": "pcb_back_by",
+   "value": -0.25,
+   "unit": "mm",
+   "expr": "",
+   "comment": "back of the main PCB"
+  },
+  {
+   "name": "pcb_front_by",
+   "value": 1.0,
+   "unit": "mm",
+   "expr": "",
+   "comment": "front of the main PCB"
+  },
+  {
+   "name": "sense_back_by",
+   "value": 3.93,
+   "unit": "mm",
+   "expr": "",
+   "comment": "back of the Sense PCB"
+  },
+  {
+   "name": "sense_front_by",
+   "value": 5.18,
+   "unit": "mm",
+   "expr": "",
+   "comment": "front of the Sense PCB"
+  },
+  {
+   "name": "fpc_front_by",
+   "value": 7.18,
+   "unit": "mm",
+   "expr": "",
+   "comment": "front of the FPC connector"
+  },
+  {
+   "name": "sd_front_by",
+   "value": 7.78,
+   "unit": "mm",
+   "expr": "",
+   "comment": "front of the microSD socket"
+  },
+  {
+   "name": "usb_front_by",
+   "value": 4.21,
+   "unit": "mm",
+   "expr": "",
+   "comment": "front of the USB-C shell"
+  },
+  {
+   "name": "mod_w",
+   "value": 8.0,
+   "unit": "mm",
+   "expr": "",
+   "comment": "camera module, square block"
+  },
+  {
+   "name": "mod_back_by",
+   "value": 7.95,
+   "unit": "mm",
+   "expr": "",
+   "comment": "back of the module = its PCB"
+  },
+  {
+   "name": "mod_front_by",
+   "value": 10.05,
+   "unit": "mm",
+   "expr": "",
+   "comment": "front of the square block"
+  },
+  {
+   "name": "tube_d",
+   "value": 7.85,
+   "unit": "mm",
+   "expr": "",
+   "comment": "lens holder ring on the block"
+  },
+  {
+   "name": "tube_by1",
+   "value": 11.95,
+   "unit": "mm",
+   "expr": "",
+   "comment": "front of the ring"
+  },
+  {
+   "name": "lens_tip_by",
+   "value": 13.71,
+   "unit": "mm",
+   "expr": "",
+   "comment": "lens nose with the lens screwed in"
+  },
+  {
+   "name": "lens_d",
+   "value": 6.32,
+   "unit": "mm",
+   "expr": "",
+   "comment": "largest lens diameter"
+  },
+  {
+   "name": "main_bx0",
+   "value": -8.67,
+   "unit": "mm",
+   "expr": "",
+   "comment": "main PCB, lower end"
+  },
+  {
+   "name": "main_bx1",
+   "value": 12.28,
+   "unit": "mm",
+   "expr": "",
+   "comment": "main PCB, upper end"
+  },
+  {
+   "name": "sense_bx0",
+   "value": -8.97,
+   "unit": "mm",
+   "expr": "",
+   "comment": "Sense PCB, lower end"
+  },
+  {
+   "name": "sense_bx1",
+   "value": 5.7,
+   "unit": "mm",
+   "expr": "",
+   "comment": "Sense PCB, upper end"
+  },
+  {
+   "name": "main_bz0",
+   "value": -15.0,
+   "unit": "mm",
+   "expr": "",
+   "comment": "main PCB edges across"
+  },
+  {
+   "name": "main_bz1",
+   "value": 2.78,
+   "unit": "mm",
+   "expr": "",
+   "comment": ""
+  },
+  {
+   "name": "sense_bz0",
+   "value": -14.5,
+   "unit": "mm",
+   "expr": "",
+   "comment": "Sense PCB edges across"
+  },
+  {
+   "name": "sense_bz1",
+   "value": 2.28,
+   "unit": "mm",
+   "expr": "",
+   "comment": ""
+  },
+  {
+   "name": "sd_bz0",
+   "value": -12.52,
+   "unit": "mm",
+   "expr": "",
+   "comment": "microSD socket and card across"
+  },
+  {
+   "name": "sd_bz1",
+   "value": -0.68,
+   "unit": "mm",
+   "expr": "",
+   "comment": ""
+  },
+  {
+   "name": "fpc_bx1",
+   "value": -2.2,
+   "unit": "mm",
+   "expr": "",
+   "comment": "FPC connector with the flex stiffener, upper end"
+  },
+  {
+   "name": "fpc_bz0",
+   "value": -14.18,
+   "unit": "mm",
+   "expr": "",
+   "comment": "FPC connector across"
+  },
+  {
+   "name": "fpc_bz1",
+   "value": 2.02,
+   "unit": "mm",
+   "expr": "",
+   "comment": ""
+  },
+  {
+   "name": "usb_bz1",
+   "value": -1.65,
+   "unit": "mm",
+   "expr": "",
+   "comment": "USB-C shell, left edge seen from the front"
+  },
+  {
+   "name": "usb_bx1",
+   "value": 13.81,
+   "unit": "mm",
+   "expr": "",
+   "comment": "USB-C mouth"
+  },
+  {
+   "name": "usb_bz",
+   "value": -6.12,
+   "unit": "mm",
+   "expr": "",
+   "comment": "USB-C receptacle centre"
+  },
+  {
+   "name": "usb_by",
+   "value": 2.11,
+   "unit": "mm",
+   "expr": "",
+   "comment": ""
+  },
+  {
+   "name": "sensor_y",
+   "value": -4.5,
+   "unit": "mm",
+   "expr": "",
+   "comment": "sensor plane; everything is built around it so that sensor, lens and screen go through the port together"
+  },
+  {
+   "name": "back_y",
+   "value": -16.8,
+   "unit": "mm",
+   "expr": "",
+   "comment": "back face of the target"
+  },
+  {
+   "name": "front_y",
+   "value": 12.2,
+   "unit": "mm",
+   "expr": "",
+   "comment": "front face of the chassis (printed on the bed)"
+  },
+  {
+   "name": "cover_t",
+   "value": 2.2,
+   "unit": "mm",
+   "expr": "",
+   "comment": "back cover"
+  },
+  {
+   "name": "rail_tip",
+   "value": 18.0,
+   "unit": "mm",
+   "expr": "",
+   "comment": "tip of the near rail; the flat of each rail lies on the chamfer between here and body_top"
+  },
+  {
+   "name": "rail_far",
+   "value": 18.4,
+   "unit": "mm",
+   "expr": "",
+   "comment": "tip of the far rail: taller, so that it bites on the far chamfer even with the tool shifted to the stop"
+  },
+  {
+   "name": "cham_gap",
+   "value": 0.02,
+   "unit": "mm",
+   "expr": "",
+   "comment": "rail flat to chamfer in the model (contact in reality)"
+  },
+  {
+   "name": "body_left",
+   "value": 16.7,
+   "unit": "mm",
+   "expr": "",
+   "comment": "left wall of the chassis"
+  },
+  {
+   "name": "body_right",
+   "value": 11.6,
+   "unit": "mm",
+   "expr": "",
+   "comment": "right wall of the chassis; the arms' free space is outside it"
+  },
+  {
+   "name": "body_top",
+   "value": 20.9,
+   "unit": "mm",
+   "expr": "",
+   "comment": "top of the body, just below the throat"
+  },
+  {
+   "name": "body_bot",
+   "value": 20.9,
+   "unit": "mm",
+   "expr": "",
+   "comment": "bottom of the body"
+  },
+  {
+   "name": "nose_z",
+   "value": 24.4,
+   "unit": "mm",
+   "expr": "",
+   "comment": "the nose reaches into the far throat; ends inside the cube's envelope"
+  },
+  {
+   "name": "land_gap",
+   "value": 0.08,
+   "unit": "mm",
+   "expr": "",
+   "comment": "rigid lands on -x to the -x throat walls, per side: limits the roll, the V keeps the contact"
+  },
+  {
+   "name": "land_top",
+   "value": 23.4,
+   "unit": "mm",
+   "expr": "",
+   "comment": "upper end of the near land, just under the waist cut"
+  },
+  {
+   "name": "land_lead",
+   "value": 0.8,
+   "unit": "mm",
+   "expr": "",
+   "comment": "lead-in at the nose"
+  },
+  {
+   "name": "relief_x",
+   "value": 16.6,
+   "unit": "mm",
+   "expr": "",
+   "comment": "relief around the throat's lip, between rail flat and land (printed corners are round)"
+  },
+  {
+   "name": "relief_z",
+   "value": 21.3,
+   "unit": "mm",
+   "expr": "",
+   "comment": ""
+  },
+  {
+   "name": "pad_over",
+   "value": 1.2,
+   "unit": "mm",
+   "expr": "",
+   "comment": "free pad ridge stands this far past its seat on the chamfer (its preload travel)"
+  },
+  {
+   "name": "pad_z",
+   "value": 20.65,
+   "unit": "mm",
+   "expr": "",
+   "comment": "height of the pad ridge: on the +x chamfer, just below its corner with the throat wall"
+  },
+  {
+   "name": "pad_end",
+   "value": 22.4,
+   "unit": "mm",
+   "expr": "",
+   "comment": "tip of the near arm"
+  },
+  {
+   "name": "pad_far_end",
+   "value": 24.2,
+   "unit": "mm",
+   "expr": "",
+   "comment": "tip of the far arm: its long slope leads the tool through the near throat"
+  },
+  {
+   "name": "pad_lead",
+   "value": 3.0,
+   "unit": "mm",
+   "expr": "",
+   "comment": "length of the ridge's slopes"
+  },
+  {
+   "name": "pad_in",
+   "value": 15.7,
+   "unit": "mm",
+   "expr": "",
+   "comment": "inner face of the pad, beside the neck"
+  },
+  {
+   "name": "pad_in_z0",
+   "value": 19.0,
+   "unit": "mm",
+   "expr": "",
+   "comment": "the arm thickens into the pad between here and pad_in_z0 + 0.7"
+  },
+  {
+   "name": "arm_out",
+   "value": 16.5,
+   "unit": "mm",
+   "expr": "",
+   "comment": "outer face of the flexure arms"
+  },
+  {
+   "name": "arm_t",
+   "value": 1.4,
+   "unit": "mm",
+   "expr": "",
+   "comment": "flexure arm thickness"
+  },
+  {
+   "name": "root_h",
+   "value": 1.5,
+   "unit": "mm",
+   "expr": "",
+   "comment": "half height of the block carrying both arms"
+  },
+  {
+   "name": "edge_sum",
+   "value": 33.1,
+   "unit": "mm",
+   "expr": "",
+   "comment": "back corners cut along |x| + |y| = edge_sum to pass the puzzle's corner chamfers"
+  },
+  {
+   "name": "neck_half",
+   "value": 13.0,
+   "unit": "mm",
+   "expr": "",
+   "comment": "neck half width"
+  },
+  {
+   "name": "shoulder_z",
+   "value": 21.4,
+   "unit": "mm",
+   "expr": "",
+   "comment": "right shoulder above the upper pad"
+  },
+  {
+   "name": "bar_half",
+   "value": 16.1,
+   "unit": "mm",
+   "expr": "",
+   "comment": "half width of the stick; its +x side is the hard stop in the near throat"
+  },
+  {
+   "name": "stop_z",
+   "value": 24.2,
+   "unit": "mm",
+   "expr": "",
+   "comment": "lower end of the stick's full width, above the lip while the near rail still needs the throat"
+  },
+  {
+   "name": "stop_lead",
+   "value": 1.0,
+   "unit": "mm",
+   "expr": "",
+   "comment": "45 deg lead below stop_z"
+  },
+  {
+   "name": "stick_sum",
+   "value": 31.4,
+   "unit": "mm",
+   "expr": "",
+   "comment": "back corners of the stick cut along |x| + |y| = stick_sum: passes the puzzle's corner chamfers shifted"
+  },
+  {
+   "name": "stick_front",
+   "value": -2.8,
+   "unit": "mm",
+   "expr": "",
+   "comment": "front face of the stick behind the slope"
+  },
+  {
+   "name": "flare_d",
+   "value": 15.0,
+   "unit": "mm",
+   "expr": "",
+   "comment": "circle cut into each side of the stick: a waist with finger undercuts"
+  },
+  {
+   "name": "flare_x",
+   "value": 19.5,
+   "unit": "mm",
+   "expr": "",
+   "comment": "centre of that circle (waist half width = flare_x - flare_d / 2)"
+  },
+  {
+   "name": "flare_z",
+   "value": 57.0,
+   "unit": "mm",
+   "expr": "",
+   "comment": "centre height: the grip, well above a puzzle piece"
+  },
+  {
+   "name": "top_z",
+   "value": 70.0,
+   "unit": "mm",
+   "expr": "",
+   "comment": "top of the stick"
+  },
+  {
+   "name": "cover_top",
+   "value": 31.5,
+   "unit": "mm",
+   "expr": "",
+   "comment": "the cover ends here: above it the USB channel is open at the back (the plug and the cable go in from there)"
+  },
+  {
+   "name": "slope_z0",
+   "value": 23.0,
+   "unit": "mm",
+   "expr": "",
+   "comment": "the front slope starts here on the front face (45 deg, prints without support)"
+  },
+  {
+   "name": "seat_clr",
+   "value": 0.1,
+   "unit": "mm",
+   "expr": "",
+   "comment": "camera module in its square seat, per side"
+  },
+  {
+   "name": "tube_clr",
+   "value": 0.2,
+   "unit": "mm",
+   "expr": "",
+   "comment": "ring in its bore, on the diameter"
+  },
+  {
+   "name": "lens_hole_d",
+   "value": 7.0,
+   "unit": "mm",
+   "expr": "",
+   "comment": "hole for the lens"
+  },
+  {
+   "name": "bore_d",
+   "value": 20.0,
+   "unit": "mm",
+   "expr": "",
+   "comment": "hood bore in front of the lens"
+  },
+  {
+   "name": "cone_ang",
+   "value": 45.0,
+   "unit": "deg",
+   "expr": "",
+   "comment": "funnel from the lens hole to the hood bore (prints without support)"
+  },
+  {
+   "name": "r_bar",
+   "value": 1.0,
+   "unit": "mm",
+   "expr": "",
+   "comment": "handle corners"
+  },
+  {
+   "name": "r_flare",
+   "value": 6.0,
+   "unit": "mm",
+   "expr": "",
+   "comment": "blend from the neck into the flare"
+  },
+  {
+   "name": "lead_c",
+   "value": 1.0,
+   "unit": "mm",
+   "expr": "",
+   "comment": "lead-in chamfer on the bottom edges"
+  },
+  {
+   "name": "r_small",
+   "value": 1.5,
+   "unit": "mm",
+   "expr": "",
+   "comment": "silhouette corners"
+  },
+  {
+   "name": "r_root",
+   "value": 0.8,
+   "unit": "mm",
+   "expr": "",
+   "comment": "flexure roots"
+  },
+  {
+   "name": "r_slope",
+   "value": 2.5,
+   "unit": "mm",
+   "expr": "",
+   "comment": "edges of the front slope"
+  },
+  {
+   "name": "seat_c",
+   "value": 0.5,
+   "unit": "mm",
+   "expr": "",
+   "comment": "chamfer at the hood bore; the caps' ring centres on it"
+  },
+  {
+   "name": "clr_board",
+   "value": 0.25,
+   "unit": "mm",
+   "expr": "",
+   "comment": "clearance around the PCBs"
+  },
+  {
+   "name": "zone_clr",
+   "value": 0.3,
+   "unit": "mm",
+   "expr": "",
+   "comment": "clearance around the socket and the connector"
+  },
+  {
+   "name": "flex_gap",
+   "value": 0.75,
+   "unit": "mm",
+   "expr": "",
+   "comment": "front of the socket zone: free for the flex in front of the module's back plane"
+  },
+  {
+   "name": "usb_ch_w",
+   "value": 13.6,
+   "unit": "mm",
+   "expr": "",
+   "comment": "USB-C plug channel (x)"
+  },
+  {
+   "name": "usb_ch_t",
+   "value": 7.2,
+   "unit": "mm",
+   "expr": "",
+   "comment": "USB-C plug channel (y)"
+  },
+  {
+   "name": "key_gap",
+   "value": 0.05,
+   "unit": "mm",
+   "expr": "",
+   "comment": "key to the USB-C shell"
+  },
+  {
+   "name": "key_h",
+   "value": 7.2,
+   "unit": "mm",
+   "expr": "",
+   "comment": "key height"
+  },
+  {
+   "name": "key_clr",
+   "value": 0.08,
+   "unit": "mm",
+   "expr": "",
+   "comment": "key in its slot, per side (z)"
+  },
+  {
+   "name": "key_slope",
+   "value": 0.0833,
+   "unit": "ul",
+   "expr": "",
+   "comment": "wedge slope of the key's BACK face (1:12, self-locking); the front stays parallel to the module"
+  },
+  {
+   "name": "key_press",
+   "value": 0.05,
+   "unit": "mm",
+   "expr": "",
+   "comment": "key presses the module by this in its nominal position"
+  },
+  {
+   "name": "key_blind",
+   "value": 2.2,
+   "unit": "mm",
+   "expr": "",
+   "comment": "slot runs this far into the right wall"
+  },
+  {
+   "name": "key_sink",
+   "value": 1.5,
+   "unit": "mm",
+   "expr": "",
+   "comment": "nominal key head under the left wall: 0.12 mm of stack tolerance before it stands proud"
+  },
+  {
+   "name": "rab_half",
+   "value": 13.0,
+   "unit": "mm",
+   "expr": "",
+   "comment": "upper part of the cover, in a rabbet of the neck"
+  },
+  {
+   "name": "rab_z0",
+   "value": 22.0,
+   "unit": "mm",
+   "expr": "",
+   "comment": "start of the upper part"
+  },
+  {
+   "name": "dov_in",
+   "value": 1.2,
+   "unit": "mm",
+   "expr": "",
+   "comment": "dovetail: the slot is this much wider at the cover's inner face"
+  },
+  {
+   "name": "dov_clr",
+   "value": 0.15,
+   "unit": "mm",
+   "expr": "",
+   "comment": "cover in its dovetail"
+  },
+  {
+   "name": "dov_z0",
+   "value": 20.0,
+   "unit": "mm",
+   "expr": "",
+   "comment": "dovetail ends this far below the axis"
+  },
+  {
+   "name": "dov_x0",
+   "value": 9.95,
+   "unit": "mm",
+   "expr": "",
+   "comment": "dovetail, narrow width at the back face, left"
+  },
+  {
+   "name": "dov_x1",
+   "value": 8.65,
+   "unit": "mm",
+   "expr": "",
+   "comment": "dovetail, narrow width at the back face, right"
+  },
+  {
+   "name": "tongue_w",
+   "value": 5.0,
+   "unit": "mm",
+   "expr": "",
+   "comment": "spring tongues of the cover"
+  },
+  {
+   "name": "tongue_l",
+   "value": 11.0,
+   "unit": "mm",
+   "expr": "",
+   "comment": ""
+  },
+  {
+   "name": "ton_c",
+   "value": 4.6,
+   "unit": "mm",
+   "expr": "",
+   "comment": "tongue centres at usb_x +- ton_c"
+  },
+  {
+   "name": "ton_z1",
+   "value": -1.0,
+   "unit": "mm",
+   "expr": "",
+   "comment": "tongue roots"
+  },
+  {
+   "name": "slit_w",
+   "value": 1.2,
+   "unit": "mm",
+   "expr": "",
+   "comment": "slits around the tongues (also the vents)"
+  },
+  {
+   "name": "bump_press",
+   "value": 0.1,
+   "unit": "mm",
+   "expr": "",
+   "comment": "tongue bumps press the main PCB by this"
+  },
+  {
+   "name": "screw_x",
+   "value": 9.4,
+   "unit": "mm",
+   "expr": "",
+   "comment": "M3 screw, cover into the neck"
+  },
+  {
+   "name": "screw_z",
+   "value": 27.0,
+   "unit": "mm",
+   "expr": "",
+   "comment": ""
+  },
+  {
+   "name": "insert_d",
+   "value": 4.0,
+   "unit": "mm",
+   "expr": "",
+   "comment": "hole for the Ruthex M3 insert"
+  },
+  {
+   "name": "insert_h",
+   "value": 8.2,
+   "unit": "mm",
+   "expr": "",
+   "comment": "deep enough for the M3 x 10 tip"
+  },
+  {
+   "name": "csk_d",
+   "value": 6.4,
+   "unit": "mm",
+   "expr": "",
+   "comment": "countersink"
+  },
+  {
+   "name": "clear_d",
+   "value": 3.4,
+   "unit": "mm",
+   "expr": "",
+   "comment": "M3 clearance"
+  },
+  {
+   "name": "mag_d",
+   "value": 8.0,
+   "unit": "mm",
+   "expr": "",
+   "comment": "NdFeB magnet 8 x 3"
+  },
+  {
+   "name": "mag_t",
+   "value": 3.0,
+   "unit": "mm",
+   "expr": "",
+   "comment": ""
+  },
+  {
+   "name": "mag_fit",
+   "value": 0.2,
+   "unit": "mm",
+   "expr": "",
+   "comment": "magnet pocket oversize (FDM, glue the magnets)"
+  },
+  {
+   "name": "mag_sink",
+   "value": 0.4,
+   "unit": "mm",
+   "expr": "",
+   "comment": "magnet sits this far under the face (sets the pull of the caps)"
+  },
+  {
+   "name": "mag_z",
+   "value": 15.5,
+   "unit": "mm",
+   "expr": "",
+   "comment": "magnets at z = +-mag_z"
+  },
+  {
+   "name": "cap_w",
+   "value": 11.0,
+   "unit": "mm",
+   "expr": "",
+   "comment": "cap half width"
+  },
+  {
+   "name": "cap_h",
+   "value": 20.0,
+   "unit": "mm",
+   "expr": "",
+   "comment": "cap half height"
+  },
+  {
+   "name": "cap_gap",
+   "value": 0.1,
+   "unit": "mm",
+   "expr": "",
+   "comment": "cap back to the chassis front: the cone seats first"
+  },
+  {
+   "name": "ring_h",
+   "value": 0.6,
+   "unit": "mm",
+   "expr": "",
+   "comment": "centring ring on the cap's back"
+  },
+  {
+   "name": "cap_bore_d",
+   "value": 18.4,
+   "unit": "mm",
+   "expr": "",
+   "comment": "clear bore of the cap"
+  },
+  {
+   "name": "scr_t",
+   "value": 0.6,
+   "unit": "mm",
+   "expr": "",
+   "comment": "printed screen (white PETG, 3 layers, printed on the bed)"
+  },
+  {
+   "name": "screen_d",
+   "value": 20.0,
+   "unit": "mm",
+   "expr": "",
+   "comment": "screen (inner face) distance from the sensor"
+  },
+  {
+   "name": "cap_edge",
+   "value": 0.6,
+   "unit": "mm",
+   "expr": "",
+   "comment": "chamfer around the cap's front"
+  },
+  {
+   "name": "rib_w",
+   "value": 0.45,
+   "unit": "mm",
+   "expr": "",
+   "comment": "reticle ribs on the inner face of the screen (one line wide)"
+  },
+  {
+   "name": "rib_h",
+   "value": 0.35,
+   "unit": "mm",
+   "expr": "",
+   "comment": ""
+  },
+  {
+   "name": "groove_w",
+   "value": 0.5,
+   "unit": "mm",
+   "expr": "",
+   "comment": "target engraved on the front of the screen, for the eye"
+  },
+  {
+   "name": "groove_h",
+   "value": 0.2,
+   "unit": "mm",
+   "expr": "",
+   "comment": "one layer deep"
+  },
+  {
+   "name": "groove_r",
+   "value": 5.0,
+   "unit": "mm",
+   "expr": "",
+   "comment": "engraved ring radius"
+  },
+  {
+   "name": "rib_r0",
+   "value": 1.5,
+   "unit": "mm",
+   "expr": "",
+   "comment": "reticle is open inside this radius (the beam centre)"
+  },
+  {
+   "name": "rib_r1",
+   "value": 8.0,
+   "unit": "mm",
+   "expr": "",
+   "comment": "reticle reaches this radius"
+  },
+  {
+   "name": "tick_l",
+   "value": 1.6,
+   "unit": "mm",
+   "expr": "",
+   "comment": "ticks across the reticle at +-tick_r"
+  },
+  {
+   "name": "tick_r",
+   "value": 5.0,
+   "unit": "mm",
+   "expr": "",
+   "comment": ""
+  },
+  {
+   "name": "nd_d",
+   "value": 12.7,
+   "unit": "mm",
+   "expr": "",
+   "comment": "ND filter diameter"
+  },
+  {
+   "name": "nd_clr",
+   "value": 0.2,
+   "unit": "mm",
+   "expr": "",
+   "comment": "filter in its pocket (diameter)"
+  },
+  {
+   "name": "nd_t",
+   "value": 2.5,
+   "unit": "mm",
+   "expr": "",
+   "comment": "filter thickness, up to"
+  },
+  {
+   "name": "nd_win_d",
+   "value": 10.0,
+   "unit": "mm",
+   "expr": "",
+   "comment": "window of the ND cap"
+  },
+  {
+   "name": "nd_pad",
+   "value": 0.7,
+   "unit": "mm",
+   "expr": "",
+   "comment": "pad under one side of the filter: tilts it ~3.5 deg"
+  },
+  {
+   "name": "nd_wall",
+   "value": 0.8,
+   "unit": "mm",
+   "expr": "",
+   "comment": "ND cap front wall"
+  },
+  {
+   "name": "lens_f",
+   "value": 3.5,
+   "unit": "mm",
+   "expr": "",
+   "comment": "XIAO Sense lens focal length (ASSUMED) - measure"
+  },
+  {
+   "name": "sensor_w",
+   "value": 3.52,
+   "unit": "mm",
+   "expr": "",
+   "comment": "OV2640 active area 1600 x 1200 x 2.2 um"
+  },
+  {
+   "name": "sensor_h",
+   "value": 2.64,
+   "unit": "mm",
+   "expr": "",
+   "comment": ""
+  },
+  {
+   "name": "arm_e",
+   "value": 2100.0,
+   "unit": "ul",
+   "expr": "",
+   "comment": "Young's modulus of the arms in MPa (PETG; PLA ~3500, Tough 2000 ~2200)"
+  },
+  {
+   "name": "mu_est",
+   "value": 0.25,
+   "unit": "ul",
+   "expr": "",
+   "comment": "friction estimate"
+  },
+  {
+   "name": "ofs_y",
+   "value": -13.1,
+   "unit": "mm",
+   "expr": "sensor_y - sensor_by",
+   "comment": "vendor by -> tool y"
+  },
+  {
+   "name": "main_x0",
+   "value": -9.53,
+   "unit": "mm",
+   "expr": "cam_bz - main_bz1",
+   "comment": ""
+  },
+  {
+   "name": "main_x1",
+   "value": 8.25,
+   "unit": "mm",
+   "expr": "cam_bz - main_bz0",
+   "comment": ""
+  },
+  {
+   "name": "sense_x0",
+   "value": -9.03,
+   "unit": "mm",
+   "expr": "cam_bz - sense_bz1",
+   "comment": ""
+  },
+  {
+   "name": "sense_x1",
+   "value": 7.75,
+   "unit": "mm",
+   "expr": "cam_bz - sense_bz0",
+   "comment": ""
+  },
+  {
+   "name": "main_z0",
+   "value": -17.42,
+   "unit": "mm",
+   "expr": "main_bx0 - cam_bx",
+   "comment": ""
+  },
+  {
+   "name": "main_z1",
+   "value": 3.53,
+   "unit": "mm",
+   "expr": "main_bx1 - cam_bx",
+   "comment": ""
+  },
+  {
+   "name": "sense_z0",
+   "value": -17.72,
+   "unit": "mm",
+   "expr": "sense_bx0 - cam_bx",
+   "comment": ""
+  },
+  {
+   "name": "sense_z1",
+   "value": -3.05,
+   "unit": "mm",
+   "expr": "sense_bx1 - cam_bx",
+   "comment": "the Sense PCB ends below the module: that gap takes the key"
+  },
+  {
+   "name": "sd_x0",
+   "value": -6.07,
+   "unit": "mm",
+   "expr": "cam_bz - sd_bz1",
+   "comment": ""
+  },
+  {
+   "name": "sd_x1",
+   "value": 5.77,
+   "unit": "mm",
+   "expr": "cam_bz - sd_bz0",
+   "comment": ""
+  },
+  {
+   "name": "fpc_x0",
+   "value": -8.77,
+   "unit": "mm",
+   "expr": "cam_bz - fpc_bz1",
+   "comment": ""
+  },
+  {
+   "name": "fpc_x1",
+   "value": 7.43,
+   "unit": "mm",
+   "expr": "cam_bz - fpc_bz0",
+   "comment": ""
+  },
+  {
+   "name": "fpc_z1",
+   "value": -10.95,
+   "unit": "mm",
+   "expr": "fpc_bx1 - cam_bx",
+   "comment": ""
+  },
+  {
+   "name": "usb_x",
+   "value": -0.63,
+   "unit": "mm",
+   "expr": "cam_bz - usb_bz",
+   "comment": ""
+  },
+  {
+   "name": "usb_y",
+   "value": -10.99,
+   "unit": "mm",
+   "expr": "usb_by + ofs_y",
+   "comment": ""
+  },
+  {
+   "name": "usb_z1",
+   "value": 5.06,
+   "unit": "mm",
+   "expr": "usb_bx1 - cam_bx",
+   "comment": "USB-C mouth (points up)"
+  },
+  {
+   "name": "pcb_back_y",
+   "value": -13.35,
+   "unit": "mm",
+   "expr": "pcb_back_by + ofs_y",
+   "comment": ""
+  },
+  {
+   "name": "pcb_front_y",
+   "value": -12.1,
+   "unit": "mm",
+   "expr": "pcb_front_by + ofs_y",
+   "comment": ""
+  },
+  {
+   "name": "sense_back_y",
+   "value": -9.17,
+   "unit": "mm",
+   "expr": "sense_back_by + ofs_y",
+   "comment": ""
+  },
+  {
+   "name": "sense_front_y",
+   "value": -7.92,
+   "unit": "mm",
+   "expr": "sense_front_by + ofs_y",
+   "comment": "the two ledges under the Sense PCB"
+  },
+  {
+   "name": "fpc_front_y",
+   "value": -5.92,
+   "unit": "mm",
+   "expr": "fpc_front_by + ofs_y",
+   "comment": ""
+  },
+  {
+   "name": "usb_front_y",
+   "value": -8.89,
+   "unit": "mm",
+   "expr": "usb_front_by + ofs_y",
+   "comment": ""
+  },
+  {
+   "name": "mod_back_y",
+   "value": -5.15,
+   "unit": "mm",
+   "expr": "mod_back_by + ofs_y",
+   "comment": "the key bears here"
+  },
+  {
+   "name": "mod_front_y",
+   "value": -3.05,
+   "unit": "mm",
+   "expr": "mod_front_by + ofs_y",
+   "comment": "the block stops here on the seat floor"
+  },
+  {
+   "name": "tube_front_y",
+   "value": -1.15,
+   "unit": "mm",
+   "expr": "tube_by1 + ofs_y",
+   "comment": ""
+  },
+  {
+   "name": "lens_tip_y",
+   "value": 0.61,
+   "unit": "mm",
+   "expr": "lens_tip_by + ofs_y",
+   "comment": ""
+  },
+  {
+   "name": "rail_z",
+   "value": 19.98,
+   "unit": "mm",
+   "expr": "cham_sum - cham_gap - rail_tip",
+   "comment": "rail tip height"
+  },
+  {
+   "name": "rail_end_x",
+   "value": 17.08,
+   "unit": "mm",
+   "expr": "cham_sum - cham_gap - body_top",
+   "comment": "inner end of the rail flat"
+  },
+  {
+   "name": "rail_ramp_z",
+   "value": 18.68,
+   "unit": "mm",
+   "expr": "rail_z - (rail_tip - body_left)",
+   "comment": ""
+  },
+  {
+   "name": "rail_far_z",
+   "value": 19.58,
+   "unit": "mm",
+   "expr": "cham_sum - cham_gap - rail_far",
+   "comment": "far rail tip height"
+  },
+  {
+   "name": "rail_far_ramp",
+   "value": 17.88,
+   "unit": "mm",
+   "expr": "rail_far_z - (rail_far - body_left)",
+   "comment": ""
+  },
+  {
+   "name": "slope_z1",
+   "value": 38.0,
+   "unit": "mm",
+   "expr": "slope_z0 + front_y - stick_front",
+   "comment": "the slope ends on the stick's front face"
+  },
+  {
+   "name": "land_x",
+   "value": 16.95,
+   "unit": "mm",
+   "expr": "throat - land_gap",
+   "comment": "rigid lands on -x"
+  },
+  {
+   "name": "relief_end",
+   "value": 21.65,
+   "unit": "mm",
+   "expr": "relief_z + (land_x - relief_x)",
+   "comment": ""
+  },
+  {
+   "name": "pad_seat",
+   "value": 17.35,
+   "unit": "mm",
+   "expr": "cham_sum - pad_z",
+   "comment": "pad ridge seated on the chamfer"
+  },
+  {
+   "name": "pad_tip",
+   "value": 18.55,
+   "unit": "mm",
+   "expr": "pad_seat + pad_over",
+   "comment": "pad ridge, free"
+  },
+  {
+   "name": "pad_low_z",
+   "value": 17.65,
+   "unit": "mm",
+   "expr": "pad_z - pad_lead",
+   "comment": "lower end of the ridge's slope"
+  },
+  {
+   "name": "arm_in",
+   "value": 15.1,
+   "unit": "mm",
+   "expr": "arm_out - arm_t",
+   "comment": ""
+  },
+  {
+   "name": "pad_in_z1",
+   "value": 19.7,
+   "unit": "mm",
+   "expr": "pad_in_z0 + 0.7 mm",
+   "comment": ""
+  },
+  {
+   "name": "cov_in_y",
+   "value": -14.6,
+   "unit": "mm",
+   "expr": "back_y + cover_t",
+   "comment": "inner face of the cover"
+  },
+  {
+   "name": "main_zone_y",
+   "value": -10.7,
+   "unit": "mm",
+   "expr": "pcb_front_y + 1.4 mm",
+   "comment": "main PCB zone ends here"
+  },
+  {
+   "name": "zone_y",
+   "value": -4.4,
+   "unit": "mm",
+   "expr": "mod_back_y + flex_gap",
+   "comment": "front of the socket zone, also front of the key slot"
+  },
+  {
+   "name": "fpc_zone_y",
+   "value": -5.72,
+   "unit": "mm",
+   "expr": "fpc_front_y + 0.2 mm",
+   "comment": "front of the connector zone"
+  },
+  {
+   "name": "key_y0",
+   "value": -8.84,
+   "unit": "mm",
+   "expr": "usb_front_y + key_gap",
+   "comment": "back of the key slot"
+  },
+  {
+   "name": "seat_w",
+   "value": 8.2,
+   "unit": "mm",
+   "expr": "mod_w + 2 * seat_clr",
+   "comment": ""
+  },
+  {
+   "name": "shoulder_y",
+   "value": -3.05,
+   "unit": "mm",
+   "expr": "mod_front_y",
+   "comment": "seat floor"
+  },
+  {
+   "name": "tube_bore_d",
+   "value": 8.05,
+   "unit": "mm",
+   "expr": "tube_d + tube_clr",
+   "comment": ""
+  },
+  {
+   "name": "tube_y1",
+   "value": -1.0,
+   "unit": "mm",
+   "expr": "tube_front_y + 0.15 mm",
+   "comment": "ring bore ends here"
+  },
+  {
+   "name": "cone_y0",
+   "value": -0.1,
+   "unit": "mm",
+   "expr": "tube_y1 + 0.9 mm",
+   "comment": "funnel starts at the lens hole"
+  },
+  {
+   "name": "cone_len",
+   "value": 6.5,
+   "unit": "mm",
+   "expr": "(bore_d - lens_hole_d) / 2",
+   "comment": "funnel length at 45 deg"
+  },
+  {
+   "name": "cone_y1",
+   "value": 6.4,
+   "unit": "mm",
+   "expr": "cone_y0 + cone_len",
+   "comment": "funnel ends at the hood bore"
+  },
+  {
+   "name": "screen_in_y",
+   "value": 15.5,
+   "unit": "mm",
+   "expr": "sensor_y + screen_d",
+   "comment": ""
+  },
+  {
+   "name": "screen_out_y",
+   "value": 16.1,
+   "unit": "mm",
+   "expr": "screen_in_y + scr_t",
+   "comment": ""
+  },
+  {
+   "name": "cap_back_y",
+   "value": 12.3,
+   "unit": "mm",
+   "expr": "front_y + cap_gap",
+   "comment": ""
+  },
+  {
+   "name": "cap_t",
+   "value": 3.8,
+   "unit": "mm",
+   "expr": "screen_out_y - cap_back_y",
+   "comment": ""
+  },
+  {
+   "name": "seat_r",
+   "value": 10.5,
+   "unit": "mm",
+   "expr": "bore_d / 2 + seat_c",
+   "comment": ""
+  },
+  {
+   "name": "ring_r0",
+   "value": 10.6,
+   "unit": "mm",
+   "expr": "seat_r + cap_gap",
+   "comment": "ring base radius"
+  },
+  {
+   "name": "ring_d0",
+   "value": 21.2,
+   "unit": "mm",
+   "expr": "2 * ring_r0",
+   "comment": ""
+  },
+  {
+   "name": "ring_tip_y",
+   "value": 11.7,
+   "unit": "mm",
+   "expr": "cap_back_y - ring_h",
+   "comment": ""
+  },
+  {
+   "name": "groove_d1",
+   "value": 10.5,
+   "unit": "mm",
+   "expr": "2 * groove_r + groove_w",
+   "comment": ""
+  },
+  {
+   "name": "groove_d0",
+   "value": 9.5,
+   "unit": "mm",
+   "expr": "2 * groove_r - groove_w",
+   "comment": ""
+  },
+  {
+   "name": "mag_pocket_d",
+   "value": 8.2,
+   "unit": "mm",
+   "expr": "mag_d + mag_fit",
+   "comment": ""
+  },
+  {
+   "name": "mag_pocket_h",
+   "value": 3.4,
+   "unit": "mm",
+   "expr": "mag_t + mag_sink",
+   "comment": ""
+  },
+  {
+   "name": "pocket_x0",
+   "value": -9.78,
+   "unit": "mm",
+   "expr": "main_x0 - clr_board",
+   "comment": ""
+  },
+  {
+   "name": "pocket_x1",
+   "value": 8.5,
+   "unit": "mm",
+   "expr": "main_x1 + clr_board",
+   "comment": ""
+  },
+  {
+   "name": "pocket_z0",
+   "value": -17.97,
+   "unit": "mm",
+   "expr": "main_z0 - clr_board - 0.3 mm",
+   "comment": "main PCB rests here; USB-C insertion loads this floor"
+  },
+  {
+   "name": "pocket_z1",
+   "value": 3.78,
+   "unit": "mm",
+   "expr": "main_z1 + clr_board",
+   "comment": "main PCB stops here when a plug is pulled"
+  },
+  {
+   "name": "sense_zone_x0",
+   "value": -9.28,
+   "unit": "mm",
+   "expr": "sense_x0 - clr_board",
+   "comment": ""
+  },
+  {
+   "name": "sense_zone_x1",
+   "value": 8.0,
+   "unit": "mm",
+   "expr": "sense_x1 + clr_board",
+   "comment": ""
+  },
+  {
+   "name": "sense_zone_z0",
+   "value": -17.97,
+   "unit": "mm",
+   "expr": "sense_z0 - clr_board",
+   "comment": ""
+  },
+  {
+   "name": "sd_zone_x0",
+   "value": -6.37,
+   "unit": "mm",
+   "expr": "sd_x0 - zone_clr",
+   "comment": ""
+  },
+  {
+   "name": "sd_zone_x1",
+   "value": 6.07,
+   "unit": "mm",
+   "expr": "sd_x1 + zone_clr",
+   "comment": ""
+  },
+  {
+   "name": "fpc_zone_x0",
+   "value": -9.07,
+   "unit": "mm",
+   "expr": "fpc_x0 - zone_clr",
+   "comment": ""
+  },
+  {
+   "name": "fpc_zone_x1",
+   "value": 7.73,
+   "unit": "mm",
+   "expr": "fpc_x1 + zone_clr",
+   "comment": ""
+  },
+  {
+   "name": "fpc_zone_z1",
+   "value": -10.65,
+   "unit": "mm",
+   "expr": "fpc_z1 + zone_clr",
+   "comment": ""
+  },
+  {
+   "name": "usb_ch_x0",
+   "value": -7.43,
+   "unit": "mm",
+   "expr": "usb_x - usb_ch_w / 2",
+   "comment": ""
+  },
+  {
+   "name": "usb_ch_x1",
+   "value": 6.17,
+   "unit": "mm",
+   "expr": "usb_x + usb_ch_w / 2",
+   "comment": ""
+  },
+  {
+   "name": "usb_ch_y1",
+   "value": -7.4,
+   "unit": "mm",
+   "expr": "cov_in_y + usb_ch_t",
+   "comment": ""
+  },
+  {
+   "name": "key_z0",
+   "value": -2.82,
+   "unit": "mm",
+   "expr": "sense_z1 + 0.15 mm + key_clr",
+   "comment": "just above the Sense PCB"
+  },
+  {
+   "name": "key_z1",
+   "value": 4.38,
+   "unit": "mm",
+   "expr": "key_z0 + key_h",
+   "comment": ""
+  },
+  {
+   "name": "slot_z0",
+   "value": -2.9,
+   "unit": "mm",
+   "expr": "key_z0 - key_clr",
+   "comment": ""
+  },
+  {
+   "name": "slot_z1",
+   "value": 4.46,
+   "unit": "mm",
+   "expr": "key_z1 + key_clr",
+   "comment": ""
+  },
+  {
+   "name": "slot_x1",
+   "value": 10.7,
+   "unit": "mm",
+   "expr": "pocket_x1 + key_blind",
+   "comment": ""
+  },
+  {
+   "name": "key_x0",
+   "value": 15.2,
+   "unit": "mm",
+   "expr": "body_left - key_sink",
+   "comment": "key head at x = -key_x0"
+  },
+  {
+   "name": "key_x1",
+   "value": 9.7,
+   "unit": "mm",
+   "expr": "slot_x1 - 1 mm",
+   "comment": "key tip, 1 mm of travel left"
+  },
+  {
+   "name": "key_front_y",
+   "value": -5.1,
+   "unit": "mm",
+   "expr": "mod_back_y + key_press",
+   "comment": "flat front of the key"
+  },
+  {
+   "name": "usb_x0",
+   "value": -5.1,
+   "unit": "mm",
+   "expr": "cam_bz - usb_bz1",
+   "comment": "left edge of the USB-C shell: the sloped back passes it at key_y0"
+  },
+  {
+   "name": "slot_back_head",
+   "value": -9.8896,
+   "unit": "mm",
+   "expr": "key_y0 + (-body_left - 1 mm - usb_x0) * key_slope",
+   "comment": "sloped back wall of the slot at the left wall"
+  },
+  {
+   "name": "slot_back_tip",
+   "value": -7.5239,
+   "unit": "mm",
+   "expr": "key_y0 + (slot_x1 - usb_x0) * key_slope",
+   "comment": ""
+  },
+  {
+   "name": "key_back_head",
+   "value": -9.6513,
+   "unit": "mm",
+   "expr": "key_y0 + 0.03 mm + (-key_x0 - usb_x0) * key_slope",
+   "comment": ""
+  },
+  {
+   "name": "key_back_tip",
+   "value": -7.5772,
+   "unit": "mm",
+   "expr": "key_y0 + 0.03 mm + (key_x1 - usb_x0) * key_slope",
+   "comment": ""
+  },
+  {
+   "name": "key_notch_y",
+   "value": -9.8063,
+   "unit": "mm",
+   "expr": "slot_back_head + 1 mm * key_slope",
+   "comment": "notch to lever the key out"
+  },
+  {
+   "name": "ton_z0",
+   "value": -12.0,
+   "unit": "mm",
+   "expr": "ton_z1 - tongue_l",
+   "comment": "tongue tips"
+  },
+  {
+   "name": "dov_out_x0",
+   "value": 9.4045,
+   "unit": "mm",
+   "expr": "dov_x0 - dov_in * 1 mm / cover_t",
+   "comment": "dovetail cut, extended 1 mm behind the back face"
+  },
+  {
+   "name": "dov_out_x1",
+   "value": 8.1045,
+   "unit": "mm",
+   "expr": "dov_x1 - dov_in * 1 mm / cover_t",
+   "comment": ""
+  },
+  {
+   "name": "csk_h",
+   "value": 1.5,
+   "unit": "mm",
+   "expr": "(csk_d - clear_d) / 2",
+   "comment": ""
+  },
+  {
+   "name": "dov_in_x0",
+   "value": 11.15,
+   "unit": "mm",
+   "expr": "dov_x0 + dov_in",
+   "comment": ""
+  },
+  {
+   "name": "dov_in_x1",
+   "value": 9.85,
+   "unit": "mm",
+   "expr": "dov_x1 + dov_in",
+   "comment": ""
+  },
+  {
+   "name": "cov_x0",
+   "value": 9.8,
+   "unit": "mm",
+   "expr": "dov_x0 - dov_clr",
+   "comment": ""
+  },
+  {
+   "name": "cov_x1",
+   "value": 8.5,
+   "unit": "mm",
+   "expr": "dov_x1 - dov_clr",
+   "comment": ""
+  },
+  {
+   "name": "cov_in_x0",
+   "value": 11.0,
+   "unit": "mm",
+   "expr": "dov_in_x0 - dov_clr",
+   "comment": ""
+  },
+  {
+   "name": "cov_in_x1",
+   "value": 9.7,
+   "unit": "mm",
+   "expr": "dov_in_x1 - dov_clr",
+   "comment": ""
+  },
+  {
+   "name": "cov_z0",
+   "value": 19.85,
+   "unit": "mm",
+   "expr": "dov_z0 - dov_clr",
+   "comment": ""
+  },
+  {
+   "name": "rab_w",
+   "value": 12.85,
+   "unit": "mm",
+   "expr": "rab_half - dov_clr",
+   "comment": ""
+  },
+  {
+   "name": "bump_y",
+   "value": -13.25,
+   "unit": "mm",
+   "expr": "pcb_back_y + bump_press",
+   "comment": "top of the bumps"
+  }
+ ],
+ "names": {
+  "assembly": "ASS - 9039 - CAMTARXIA - V04",
+  "chassis": "PRT - 9040 - CAMTARXIA - V04",
+  "cover": "PRT - 9041 - CAMTARCOV - V04",
+  "key": "PRT - 9033 - CAMTARKEY - V04",
+  "screen": "PRT - 9034 - CAMTARSCR - V04",
+  "ndcap": "PRT - 9035 - CAMTARNDF - V04"
+ },
+ "files": {
+  "chassis": "C:\\Users\\benir\\Documents\\openuc2-xiao-target\\INVENTOR\\PRT - 9040 - CAMTARXIA - V04.ipt",
+  "cover": "C:\\Users\\benir\\Documents\\openuc2-xiao-target\\INVENTOR\\PRT - 9041 - CAMTARCOV - V04.ipt",
+  "key": "C:\\Users\\benir\\Documents\\openuc2-xiao-target\\INVENTOR\\PRT - 9033 - CAMTARKEY - V04.ipt",
+  "screen": "C:\\Users\\benir\\Documents\\openuc2-xiao-target\\INVENTOR\\PRT - 9034 - CAMTARSCR - V04.ipt",
+  "ndcap": "C:\\Users\\benir\\Documents\\openuc2-xiao-target\\INVENTOR\\PRT - 9035 - CAMTARNDF - V04.ipt",
+  "cube": "C:\\Users\\benir\\Documents\\openUC2-CAD-new\\workspace\\ASS\\ASS - 2000 - CUB - V04.iam",
+  "puzzle": "C:\\Users\\benir\\Documents\\openUC2-CAD-new\\workspace\\PRT\\PRT - 1004 - PUZ11 - V04 - A.ipt",
+  "xiao": "C:\\Users\\benir\\Documents\\openUC2-CAD-new\\workspace\\BUY\\OLD STUFF\\BUY - Seeed Studio XIAO-ESP32-S3-Sense\\BUY - Seeed Studio XIAO-ESP32-S3-Sense\\BUY - Seeed Studio XIAO-ESP32-S3-Sense.iam",
+  "magnet": "C:\\Users\\benir\\Documents\\openUC2-CAD-new\\workspace\\BUY\\BUY - NeFeB-Magnet - \u00f88x3 N40 Ni.ipt",
+  "insert": "C:\\Users\\benir\\Documents\\openUC2-CAD-new\\workspace\\BUY\\BUY - Ruthex - Thread insert - RX-M3Sx4.0.ipt",
+  "screw": "C:\\Users\\benir\\Documents\\openUC2-CAD-new\\workspace\\STD\\ISO 10642 - A2-70\\ISO 10642 - Countersunk head screw with hex socket - M3 x 10 - A2-70.ipt"
+ },
+ "chassis": {
+  "bodies": 1,
+  "features": 32,
+  "user_parameters": 185,
+  "volume_mm3": 47484.7,
+  "faces": 137,
+  "range_mm": [
+   -18.4,
+   -16.8,
+   -24.4,
+   18.55,
+   12.2,
+   70.0
+  ],
+  "health": [],
+  "warnings": [],
+  "not_parametric": [
+   "arrow: fixed profile (not pinned)"
+  ]
+ },
+ "cover": {
+  "bodies": 1,
+  "features": 6,
+  "user_parameters": 41,
+  "volume_mm3": 2157.94,
+  "faces": 38,
+  "range_mm": [
+   -12.85,
+   -16.8,
+   -19.85,
+   12.85,
+   -13.25,
+   31.5
+  ],
+  "health": [],
+  "warnings": [],
+  "not_parametric": []
+ },
+ "top": {
+  "removed": 0,
+  "interference_mm3": {
+   "cube / chassis": {
+    "mm3": 85.336,
+    "boxes": [
+     [
+      17.03,
+      -16.07,
+      19.94,
+      18.55,
+      12.2,
+      21.94
+     ],
+     [
+      17.03,
+      -16.07,
+      -23.24,
+      18.55,
+      12.2,
+      -19.94
+     ]
+    ]
+   },
+   "chassis / XIAO ESP32-S3 Sense": {
+    "mm3": 36.221,
+    "boxes": [
+     [
+      -5.41,
+      -6.5,
+      4.46,
+      5.77,
+      -4.85,
+      6.64
+     ]
+    ]
+   },
+   "chassis / thread insert": {
+    "mm3": 4.191,
+    "boxes": [
+     [
+      7.04,
+      -13.4,
+      24.64,
+      11.76,
+      -10.59,
+      29.35
+     ]
+    ]
+   },
+   "back cover / XIAO ESP32-S3 Sense": {
+    "mm3": 1.2,
+    "boxes": [
+     [
+      -6.73,
+      -13.35,
+      -11.4,
+      5.47,
+      -13.25,
+      -9.4
+     ]
+    ]
+   },
+   "wedge key / XIAO ESP32-S3 Sense": {
+    "mm3": 61.267,
+    "boxes": [
+     [
+      -4.0,
+      -5.15,
+      -2.82,
+      4.0,
+      -5.1,
+      4.0
+     ],
+     [
+      -5.41,
+      -6.5,
+      -2.82,
+      5.77,
+      -5.75,
+      4.38
+     ]
+    ]
+   },
+   "thread insert / M3 screw": {
+    "mm3": 8.535,
+    "boxes": [
+     [
+      7.9,
+      -14.57,
+      25.5,
+      10.9,
+      -10.63,
+      28.5
+     ]
+    ]
+   }
+  },
+  "occurrences": [
+   {
+    "role": "cube",
+    "occurrence": "ASS - 2000 - CUB - V04:1",
+    "file": "C:\\Users\\benir\\Documents\\openUC2-CAD-new\\workspace\\ASS\\ASS - 2000 - CUB - V04.iam",
+    "reference": false
+   },
+   {
+    "role": "puzzle piece on top",
+    "occurrence": "PRT - 1004 - PUZ11 - V04 - A:1",
+    "file": "C:\\Users\\benir\\Documents\\openUC2-CAD-new\\workspace\\PRT\\PRT - 1004 - PUZ11 - V04 - A.ipt",
+    "reference": false
+   },
+   {
+    "role": "chassis",
+    "occurrence": "PRT - 9040 - CAMTARXIA - V04:1",
+    "file": "C:\\Users\\benir\\Documents\\openuc2-xiao-target\\INVENTOR\\PRT - 9040 - CAMTARXIA - V04.ipt",
+    "reference": false
+   },
+   {
+    "role": "back cover",
+    "occurrence": "PRT - 9041 - CAMTARCOV - V04:1",
+    "file": "C:\\Users\\benir\\Documents\\openuc2-xiao-target\\INVENTOR\\PRT - 9041 - CAMTARCOV - V04.ipt",
+    "reference": false
+   },
+   {
+    "role": "wedge key",
+    "occurrence": "PRT - 9033 - CAMTARKEY - V04:1",
+    "file": "C:\\Users\\benir\\Documents\\openuc2-xiao-target\\INVENTOR\\PRT - 9033 - CAMTARKEY - V04.ipt",
+    "reference": false
+   },
+   {
+    "role": "screen cap",
+    "occurrence": "PRT - 9034 - CAMTARSCR - V04:1",
+    "file": "C:\\Users\\benir\\Documents\\openuc2-xiao-target\\INVENTOR\\PRT - 9034 - CAMTARSCR - V04.ipt",
+    "reference": false
+   },
+   {
+    "role": "XIAO ESP32-S3 Sense",
+    "occurrence": "BUY - Seeed Studio XIAO-ESP32-S3-Sense:1",
+    "file": "C:\\Users\\benir\\Documents\\openUC2-CAD-new\\workspace\\BUY\\OLD STUFF\\BUY - Seeed Studio XIAO-ESP32-S3-Sense\\BUY - Seeed Studio XIAO-ESP32-S3-Sense\\BUY - Seeed Studio XIAO-ESP32-S3-Sense.iam",
+    "reference": false
+   },
+   {
+    "role": "thread insert",
+    "occurrence": "BUY - Ruthex - Thread insert - RX-M3Sx4.0:1",
+    "file": "C:\\Users\\benir\\Documents\\openUC2-CAD-new\\workspace\\BUY\\BUY - Ruthex - Thread insert - RX-M3Sx4.0.ipt",
+    "reference": false
+   },
+   {
+    "role": "M3 screw",
+    "occurrence": "ISO 10642 - Countersunk head screw with hex socket - M3 x 10 - A2-70:1",
+    "file": "C:\\Users\\benir\\Documents\\openUC2-CAD-new\\workspace\\STD\\ISO 10642 - A2-70\\ISO 10642 - Countersunk head screw with hex socket - M3 x 10 - A2-70.ipt",
+    "reference": false
+   },
+   {
+    "role": "magnet chassis top",
+    "occurrence": "BUY - NeFeB-Magnet - \u00f88x3 N40 Ni:1",
+    "file": "C:\\Users\\benir\\Documents\\openUC2-CAD-new\\workspace\\BUY\\BUY - NeFeB-Magnet - \u00f88x3 N40 Ni.ipt",
+    "reference": false
+   },
+   {
+    "role": "magnet cap top",
+    "occurrence": "BUY - NeFeB-Magnet - \u00f88x3 N40 Ni:2",
+    "file": "C:\\Users\\benir\\Documents\\openUC2-CAD-new\\workspace\\BUY\\BUY - NeFeB-Magnet - \u00f88x3 N40 Ni.ipt",
+    "reference": false
+   },
+   {
+    "role": "magnet chassis bottom",
+    "occurrence": "BUY - NeFeB-Magnet - \u00f88x3 N40 Ni:3",
+    "file": "C:\\Users\\benir\\Documents\\openUC2-CAD-new\\workspace\\BUY\\BUY - NeFeB-Magnet - \u00f88x3 N40 Ni.ipt",
+    "reference": false
+   },
+   {
+    "role": "magnet cap bottom",
+    "occurrence": "BUY - NeFeB-Magnet - \u00f88x3 N40 Ni:4",
+    "file": "C:\\Users\\benir\\Documents\\openUC2-CAD-new\\workspace\\BUY\\BUY - NeFeB-Magnet - \u00f88x3 N40 Ni.ipt",
+    "reference": false
+   }
+  ]
+ },
+ "side": {
+  "removed": 0,
+  "interference_mm3": {
+   "cube / chassis": {
+    "mm3": 106.202,
+    "boxes": [
+     [
+      -23.33,
+      -16.1,
+      -18.55,
+      21.97,
+      12.2,
+      -17.0
+     ]
+    ]
+   },
+   "chassis / XIAO ESP32-S3 Sense": {
+    "mm3": 36.221,
+    "boxes": [
+     [
+      4.46,
+      -6.5,
+      -5.77,
+      6.64,
+      -4.85,
+      5.41
+     ]
+    ]
+   },
+   "chassis / thread insert": {
+    "mm3": 4.191,
+    "boxes": [
+     [
+      24.64,
+      -13.4,
+      -11.76,
+      29.35,
+      -10.59,
+      -7.04
+     ]
+    ]
+   },
+   "back cover / XIAO ESP32-S3 Sense": {
+    "mm3": 1.2,
+    "boxes": [
+     [
+      -11.4,
+      -13.35,
+      -5.47,
+      -9.4,
+      -13.25,
+      6.73
+     ]
+    ]
+   },
+   "wedge key / XIAO ESP32-S3 Sense": {
+    "mm3": 61.267,
+    "boxes": [
+     [
+      -2.82,
+      -5.15,
+      -4.0,
+      4.0,
+      -5.1,
+      4.0
+     ],
+     [
+      -2.82,
+      -6.5,
+      -5.77,
+      4.38,
+      -5.75,
+      5.41
+     ]
+    ]
+   },
+   "thread insert / M3 screw": {
+    "mm3": 8.535,
+    "boxes": [
+     [
+      25.5,
+      -14.57,
+      -10.9,
+      28.5,
+      -10.63,
+      -7.9
+     ]
+    ]
+   }
+  },
+  "occurrences": [
+   {
+    "role": "cube",
+    "occurrence": "ASS - 2000 - CUB - V04:1",
+    "file": "C:\\Users\\benir\\Documents\\openUC2-CAD-new\\workspace\\ASS\\ASS - 2000 - CUB - V04.iam",
+    "reference": false
+   },
+   {
+    "role": "puzzle piece on top",
+    "occurrence": "PRT - 1004 - PUZ11 - V04 - A:1",
+    "file": "C:\\Users\\benir\\Documents\\openUC2-CAD-new\\workspace\\PRT\\PRT - 1004 - PUZ11 - V04 - A.ipt",
+    "reference": false
+   },
+   {
+    "role": "chassis",
+    "occurrence": "PRT - 9040 - CAMTARXIA - V04:1",
+    "file": "C:\\Users\\benir\\Documents\\openuc2-xiao-target\\INVENTOR\\PRT - 9040 - CAMTARXIA - V04.ipt",
+    "reference": false
+   },
+   {
+    "role": "back cover",
+    "occurrence": "PRT - 9041 - CAMTARCOV - V04:1",
+    "file": "C:\\Users\\benir\\Documents\\openuc2-xiao-target\\INVENTOR\\PRT - 9041 - CAMTARCOV - V04.ipt",
+    "reference": false
+   },
+   {
+    "role": "wedge key",
+    "occurrence": "PRT - 9033 - CAMTARKEY - V04:1",
+    "file": "C:\\Users\\benir\\Documents\\openuc2-xiao-target\\INVENTOR\\PRT - 9033 - CAMTARKEY - V04.ipt",
+    "reference": false
+   },
+   {
+    "role": "screen cap",
+    "occurrence": "PRT - 9034 - CAMTARSCR - V04:1",
+    "file": "C:\\Users\\benir\\Documents\\openuc2-xiao-target\\INVENTOR\\PRT - 9034 - CAMTARSCR - V04.ipt",
+    "reference": false
+   },
+   {
+    "role": "XIAO ESP32-S3 Sense",
+    "occurrence": "BUY - Seeed Studio XIAO-ESP32-S3-Sense:1",
+    "file": "C:\\Users\\benir\\Documents\\openUC2-CAD-new\\workspace\\BUY\\OLD STUFF\\BUY - Seeed Studio XIAO-ESP32-S3-Sense\\BUY - Seeed Studio XIAO-ESP32-S3-Sense\\BUY - Seeed Studio XIAO-ESP32-S3-Sense.iam",
+    "reference": false
+   },
+   {
+    "role": "thread insert",
+    "occurrence": "BUY - Ruthex - Thread insert - RX-M3Sx4.0:1",
+    "file": "C:\\Users\\benir\\Documents\\openUC2-CAD-new\\workspace\\BUY\\BUY - Ruthex - Thread insert - RX-M3Sx4.0.ipt",
+    "reference": false
+   },
+   {
+    "role": "M3 screw",
+    "occurrence": "ISO 10642 - Countersunk head screw with hex socket - M3 x 10 - A2-70:1",
+    "file": "C:\\Users\\benir\\Documents\\openUC2-CAD-new\\workspace\\STD\\ISO 10642 - A2-70\\ISO 10642 - Countersunk head screw with hex socket - M3 x 10 - A2-70.ipt",
+    "reference": false
+   },
+   {
+    "role": "magnet chassis top",
+    "occurrence": "BUY - NeFeB-Magnet - \u00f88x3 N40 Ni:1",
+    "file": "C:\\Users\\benir\\Documents\\openUC2-CAD-new\\workspace\\BUY\\BUY - NeFeB-Magnet - \u00f88x3 N40 Ni.ipt",
+    "reference": false
+   },
+   {
+    "role": "magnet cap top",
+    "occurrence": "BUY - NeFeB-Magnet - \u00f88x3 N40 Ni:2",
+    "file": "C:\\Users\\benir\\Documents\\openUC2-CAD-new\\workspace\\BUY\\BUY - NeFeB-Magnet - \u00f88x3 N40 Ni.ipt",
+    "reference": false
+   },
+   {
+    "role": "magnet chassis bottom",
+    "occurrence": "BUY - NeFeB-Magnet - \u00f88x3 N40 Ni:3",
+    "file": "C:\\Users\\benir\\Documents\\openUC2-CAD-new\\workspace\\BUY\\BUY - NeFeB-Magnet - \u00f88x3 N40 Ni.ipt",
+    "reference": false
+   },
+   {
+    "role": "magnet cap bottom",
+    "occurrence": "BUY - NeFeB-Magnet - \u00f88x3 N40 Ni:4",
+    "file": "C:\\Users\\benir\\Documents\\openUC2-CAD-new\\workspace\\BUY\\BUY - NeFeB-Magnet - \u00f88x3 N40 Ni.ipt",
+    "reference": false
+   }
+  ]
+ },
+ "checks": [
+  [
+   "info",
+   "screen at 20 mm: lens 4.52 mm from the sensor (unscrew ~1.0 mm from infinity focus), m 0.29, field 12.0 x 9.0 mm"
+  ],
+  [
+   "info",
+   "flexure: k 5.91 N/mm at the ridge, seated 7.1 N per pad = 14.2 N into the V; through the throat 2.49 / 2.89 mm (near / far rail), 17.1 N, strain 1.66 %; push about 19 N peak, 15 N sliding; a straight pull starts at 24 N and peaks at 36 N, an overshoot alike"
+  ],
+  [
+   "info",
+   "stop: shoulder 0.93 mm off the +x throat wall; at the stop the far rail still bites 0.44 mm on the chamfer"
+  ],
+  [
+   "info",
+   "roll: free rock +-0.20 deg between the lands; a rail stays down up to 3.5 N (+x) / 6.7 N (-x) at the top of the stick"
+  ],
+  [
+   "info",
+   "tool x -18.0..18.55 (free), y -16.8..16.10, z -24.4..70.0; sensor at y -4.5, screen at y 15.50, rails y -15.1..12.2"
+  ]
+ ],
+ "overrides": {}
+}
