@@ -56,8 +56,11 @@ def classify(m, vol, refs, p) -> str:
         return "cube"                        # the two CUBHLF111 halves
     if lo[2] > 24.5 and abs(d[0] - 60) < 12 and d[2] < 8:
         return "puzzle"
-    if abs(c[0] - p.screw_x) < 1.0 and abs(c[2] - p.screw_z) < 1.0:
-        return "hardware"                    # the M3 screw and its insert
+    for x, z in ((p.screw_x, p.screw_z), (-p.screw_x2, p.screw_z), (p.usb_x, -p.screw_z3)):
+        if abs(c[0] - x) < 1.0 and abs(c[2] - z) < 1.0:
+            return "hardware"                # the M3 screws and their inserts
+    if abs(c[1] - p.lock_y) < 1.0 and abs(c[2]) < 1.0 and c[0] < -4.0:
+        return "hardware"                    # the lock screw and its insert
     return "xiao"
 
 
@@ -277,6 +280,18 @@ def main() -> None:
     print(f"[{'ok' if not hit.any() else 'FAIL'}] lens at y {y_lens:.2f} sees the field {opt['field_w']:.1f} x {opt['field_h']:.1f} mm at y {p.screen_in_y:.1f} "
           f"past the chassis ({len(pts)} points)")
 
+    # 4b) the lens tube: a lens of lens_d slides from the module to the tube's end; the jaw is free between its slits
+    bore = np.array([(r * math.cos(a), y, r * math.sin(a)) for r in (0.0, p.lens_d / 2) for a in np.linspace(0, 2 * math.pi, 25) for y in np.linspace(p.tube_y1 + 0.1, p.lens_tube_y + 0.5, 30)])
+    hit = inside_any(bore, [printed["chassis"]])
+    slit = np.array([(-math.sqrt(p.ev("lens_hole_d / 2 + 0.5 mm") ** 2 - p.jaw_z ** 2), y, sg * p.jaw_z) for y in np.linspace(p.jaw_y0 + 0.2, p.lens_tube_y - 0.1, 12) for sg in (1, -1)])
+    jaw = np.array([(-p.ev("lens_hole_d / 2 + 0.5 mm"), y, 0.0) for y in np.linspace(p.jaw_y0 + 0.2, p.lens_tube_y - 0.1, 12)])
+    good = not hit.any() and not inside_any(slit, [printed["chassis"]]).any() and inside_any(jaw, [printed["chassis"]]).all()
+    tip = np.array([(-(p.lock_tip + 0.2), p.lock_y, 0.0)])
+    good = good and not inside_any(tip, [printed["chassis"]]).any()
+    print(f"[{'ok' if good else 'FAIL'}] lens tube: a D{p.lens_d:.2f} lens slides from the module to y {p.lens_tube_y:.1f}, the jaw is cut free, the lock screw's path is open")
+    if not good:
+        problems.append("lens tube, jaw or lock screw path")
+
     # 5) bare chip: acceptance half-angle through the seat and funnel (cap off, ring of the module not counted)
     def free(theta, corner, direction):
         d = np.array([math.sin(theta) * direction[0], math.cos(theta), math.sin(theta) * direction[1]])
@@ -393,6 +408,16 @@ def figures(p, items, printed, opt):
     fig.savefig(DOCS / "xiao_target_section_y.png", dpi=130)
     plt.close(fig)
 
+    # the lens tube, jaw and lock screw
+    fig, ax = plt.subplots(figsize=(11, 8))
+    section(ax, items, (0, 0, 0.3), (0, 0, 1), TO_XY, (-18, 13), (-16, 17))
+    ax.set_xlabel("x [mm]")
+    ax.set_ylabel("y [mm] (the beam comes from +y)")
+    ax.set_title("section z = 0.3: lens tube in the funnel, jaw on its -x side, lock screw M3 x 8 from the side. The model shows the lens still in the module", fontsize=9)
+    fig.tight_layout()
+    fig.savefig(DOCS / "xiao_target_lens.png", dpi=130)
+    plt.close(fig)
+
     # entry sequence, top entry with a puzzle piece on
     frame = [(m, g) for m, g in items if g in ("cube", "puzzle")]
     fig, axs = plt.subplots(1, 5, figsize=(24, 12.5))
@@ -440,7 +465,7 @@ def figures(p, items, printed, opt):
         ax.plot([-p.throat, 0], [sz * 22.3, sz * 22.3], color="#1d6fa5", lw=0.8, ls="--")
     ax.annotate("", xy=(0, 22.3), xytext=(0, 0), arrowprops=dict(arrowstyle="<->", color="#1d6fa5", lw=1.2))
     ax.text(0.8, 11, "lever 22 mm", color="#1d6fa5", fontsize=11)
-    ax.set_title("rev D: rails and ridges in the chamfers fix x and z (red).\nThe lands, 0.05-0.1 mm off the -x walls, stop the roll (blue)", fontsize=11)
+    ax.set_title("rails and ridges in the chamfers fix x and z (red).\nThe lands, 0.05-0.1 mm off the -x walls, stop the roll (blue)", fontsize=11)
     fig.tight_layout()
     fig.savefig(DOCS / "xiao_target_roll.png", dpi=125)
     plt.close(fig)

@@ -1,4 +1,4 @@
-"""Build the XIAO beam target rev D as native, parametric Inventor parts and assemblies.
+"""Build the XIAO beam target as native, parametric Inventor parts and assemblies.
 
     python build_xiao_target.py                    # 5 parts, assemblies (entry from the top / side), interference
     python build_xiao_target.py --set screen_d=21  # any parameter of xiao_target.py
@@ -12,7 +12,7 @@ Every dimension is an Inventor user parameter (fx). Parts are modelled as printe
 flexure pads overlap the +x chamfers by pad_over, which is their preload. Needs the miniforge `pyinventor` env.
 
 The build runs in its OWN hidden Inventor, started here and quit here, so a hang or a crash cannot touch the
-session Benedict works in (2026-11-05: Documents.Open in the live session crashed it). If no new process
+session in use. If no new process
 appears the script stops without doing anything. --live-session uses the running Inventor instead.
 """
 from __future__ import annotations
@@ -21,6 +21,7 @@ import argparse
 import json
 import math
 import os
+import shutil
 import subprocess
 import sys
 import threading
@@ -33,7 +34,7 @@ sys.path.insert(0, str(HERE))
 from cadlib.inventor_helpers import Builder, close_if_open, kAssemblyDocumentObject, safe, session  # noqa: E402
 from cadlib.native_part import NativePart, export_step, kCut, kJoin, kNeg, read_user_parameters  # noqa: E402
 from cadlib.params import ParamSet  # noqa: E402
-from xiao_target import INV_DIR, NAMES, PARTS, chassis_outline, checks, make_params, overrides_from, report  # noqa: E402
+from xiao_target import INV_DIR, NAMES, STL_DIR, PARTS, chassis_outline, checks, make_params, overrides_from, report  # noqa: E402
 
 DARK = ("Smooth - Dark Gray", "Satin - Dark Gray", "Dark Gray", "Smooth - Black", "Satin - Black", "Black")
 WHITE = ("Smooth - White", "Satin - White", "White")
@@ -43,6 +44,8 @@ I3 = ((1, 0, 0), (0, 1, 0), (0, 0, 1))
 MAG_Y = ((1, 0, 0), (0, 0, -1), (0, 1, 0))          # magnet axis (part z) along tool y
 XIAO_COLS = ((0, 0, 1), (0, 1, 0), (-1, 0, 0))      # vendor bx -> z, by -> y, bz -> -x
 SCREW_Y = ((1, 0, 0), (0, 0, 1), (0, -1, 0))        # ISO 10642: shank (part -z) along +y
+SCREW_X = I3                                         # ISO 4762 in CAD-new: origin under the head, shank along part +x
+INSERT_X = ((0, -1, 0), (1, 0, 0), (0, 0, 1))       # thread insert: part +y along +x
 SIDE = ((0, 0, -1), (0, 1, 0), (1, 0, 0))           # turned about the beam: handle to +x, rails to +z
 
 
@@ -164,10 +167,27 @@ def chassis_features(part: NativePart) -> None:
     s = part.sketch_y("cone_y1", "funnel sketch")
     part.circle(s, 0, 0, "bore_d", "funnel")
     part.extrude(s, "cone_len", kNeg, kCut, "funnel to the lens", taper="-cone_ang")
+    s = part.sketch_y("cone_y0 - 0.5 mm", "lens tube sketch")
+    part.circle(s, 0, 0, "lens_tube_d", "lens tube")
+    part.extrude_toward(s, "lens_tube_y - cone_y0 + 0.5 mm", kJoin, "lens tube, free-standing in the funnel", "y", True)
     part.chamfer(part.circle_edges_at(0, p.front_y, 0, p.bore_d / 2), "seat_c", "seat of the caps' ring")
-    s = part.sketch_y("cone_y0 + 1 mm", "lens hole sketch")
+    s = part.sketch_y("lens_tube_y + 1 mm", "lens hole sketch")
     part.circle(s, 0, 0, "lens_hole_d", "lens hole")
-    part.extrude_toward(s, "cone_y0 + 1 mm - tube_y1 + 0.5 mm", kCut, "lens hole", "y", False)
+    part.extrude_toward(s, "lens_tube_y + 1 mm - tube_y1 + 0.5 mm", kCut, "bore of the lens tube", "y", False)
+    s = part.sketch_y("lens_tube_y + 1 mm", "jaw sketch")
+    for sg in ("", "-"):
+        z0, z1 = f"{sg}(jaw_z - jaw_slit / 2)", f"{sg}(jaw_z + jaw_slit / 2)"
+        part.rect(s, "-lens_tube_d / 2 - 0.5 mm", z0, "-2.2 mm", z1, f"slit {sg or '+'}", pin_u0="-lens_tube_d / 2 - 0.5 mm", pin_u1="-2.2 mm", pin_v0=z0, pin_v1=z1)
+    part.extrude_toward(s, "lens_tube_y + 1 mm - jaw_y0", kCut, "slits beside the jaw", "y", False)
+    s = part.sketch_x("-body_left - 1 mm", "lock recess sketch")
+    part.circle(s, "lock_y", 0, "lock_head_d", "lock recess")
+    part.extrude_toward(s, "body_left + 1 mm - lock_floor", kCut, "recess of the lock screw's head", "x", True)
+    s = part.sketch_x("-lock_floor", "lock insert sketch")
+    part.circle(s, "lock_y", 0, "insert_d", "lock insert")
+    part.extrude_toward(s, "5 mm", kCut, "hole of the lock screw's thread insert", "x", True)
+    s = part.sketch_x("-lock_floor + 4.5 mm", "lock clearance sketch")
+    part.circle(s, "lock_y", 0, "clear_d", "lock clearance")
+    part.extrude_toward(s, "2.75 mm", kCut, "clearance of the lock screw, up to the jaw", "x", True)
     s = part.sketch_y("tube_y1", "ring bore sketch")
     part.circle(s, 0, 0, "tube_bore_d", "ring bore")
     part.extrude_toward(s, "tube_y1 - shoulder_y + 0.5 mm", kCut, "bore of the module's ring", "y", False)
@@ -199,23 +219,23 @@ def chassis_features(part: NativePart) -> None:
     part.rect(s, "key_notch_y - 1.4 mm", "-1.5 mm", "key_notch_y + 0.1 mm", "1.5 mm", "key notch", pin_u0="key_notch_y - 1.4 mm", pin_u1="key_notch_y + 0.1 mm",
               wv="3 mm", sym_v=True)
     part.extrude_toward(s, "4.5 mm", kCut, "notch to lever the key out", "x", True)
-    # USB-C channel down through the neck, rabbet and dovetail of the cover
+    # USB-C channel down through the neck, recess of the cover
     s = part.sketch_z("top_z + 1 mm", "USB channel sketch")
     part.rect(s, "usb_ch_x0", "cov_in_y - 1 mm", "usb_ch_x1", "usb_ch_y1", "USB channel", pin_u0="usb_ch_x0", pin_u1="usb_ch_x1",
               pin_v0="cov_in_y - 1 mm", pin_v1="usb_ch_y1")
     part.extrude_toward(s, "top_z + 1 mm - pocket_z1 + 0.5 mm", kCut, "USB-C plug channel", "z", False)
-    s = part.sketch_y("back_y - 1 mm", "rabbet sketch")
-    part.rect(s, "-rab_half", "rab_z0", "rab_half", "cover_top + dov_clr", "rabbet", wu="2 * rab_half", sym_u=True, pin_v0="rab_z0", pin_v1="cover_top + dov_clr")
-    part.extrude_toward(s, "cover_t + 1 mm", kCut, "rabbet of the cover", "y", True)
+    s = part.sketch_y("back_y - 1 mm", "cover recess sketch")
+    part.polygon(s, [("-low_x0", "-nose_z - 1 mm"), ("low_x1", "-nose_z - 1 mm"), ("low_x1", "rab_z0"), ("rab_x1", "rab_z0"), ("rab_x1", "cover_top + cov_clr"),
+                     ("-rab_x0", "cover_top + cov_clr"), ("-rab_x0", "rab_z0"), ("-low_x0", "rab_z0")], "cover recess")
+    part.extrude_toward(s, "cover_t + 1 mm", kCut, "recess of the cover", "y", True)
     s = part.sketch_y("back_y - 1 mm", "back slot sketch")
     part.rect(s, "usb_ch_x0", "cover_top", "usb_ch_x1", "top_z + 1 mm", "back slot", pin_u0="usb_ch_x0", pin_u1="usb_ch_x1", pin_v0="cover_top", pin_v1="top_z + 1 mm")
     part.extrude_toward(s, "cover_t + 2 mm", kCut, "USB channel open at the back of the stick", "y", True)
-    s = part.sketch_z("rab_z0 + 1 mm", "dovetail sketch")
-    part.polygon(s, [("-dov_out_x0", "back_y - 1 mm"), ("dov_out_x1", "back_y - 1 mm"), ("dov_in_x1", "cov_in_y"), ("-dov_in_x0", "cov_in_y")], "dovetail")
-    part.extrude_toward(s, "rab_z0 + 1 mm + dov_z0", kCut, "dovetail of the cover", "z", False)
     s = part.sketch_y("cov_in_y", "insert sketch")
-    part.circle(s, "screw_x", "screw_z", "insert_d", "insert hole")
-    part.extrude_toward(s, "insert_h", kCut, "hole of the thread insert", "y", True)
+    part.circle(s, "screw_x", "screw_z", "insert_d", "insert hole 1")
+    part.circle(s, "-screw_x2", "screw_z", "insert_d", "insert hole 2")
+    part.circle(s, "usb_x", "-screw_z3", "insert_d", "insert hole 3")
+    part.extrude_toward(s, "insert_h", kCut, "holes of the thread inserts", "y", True)
     # magnets
     s = part.sketch_y("front_y", "magnet sketch")
     part.circle(s, 0, "mag_z", "mag_pocket_d", "magnet top")
@@ -236,12 +256,11 @@ def chassis_features(part: NativePart) -> None:
 
 # ---------------------------------------------------------------------- back cover
 def cover_features(part: NativePart) -> None:
-    s = part.sketch_z("-cov_z0", "cover sketch")
-    part.polygon(s, [("-cov_x0", "back_y"), ("cov_x1", "back_y"), ("cov_in_x1", "cov_in_y"), ("-cov_in_x0", "cov_in_y")], "cover section")
-    part.extrude_toward(s, "cov_z0 + rab_z0 + 1 mm", kJoin, "lower part in the dovetail", "z", True)
-    s = part.sketch_y("back_y", "upper cover sketch")
-    part.rect(s, "-rab_w", "rab_z0", "rab_w", "cover_top", "upper part", wu="2 * rab_w", sym_u=True, pin_v0="rab_z0", pin_v1="cover_top")
-    part.extrude_toward(s, "cover_t", kJoin, "upper part on the neck", "y", True)
+    s = part.sketch_y("back_y", "cover sketch")
+    c = "cov_clr"
+    part.polygon(s, [(f"-low_x0 + {c}", "-cov_bot"), (f"low_x1 - {c}", "-cov_bot"), (f"low_x1 - {c}", f"rab_z0 + {c}"), (f"rab_x1 - {c}", f"rab_z0 + {c}"),
+                     (f"rab_x1 - {c}", "cover_top"), (f"-rab_x0 + {c}", "cover_top"), (f"-rab_x0 + {c}", f"rab_z0 + {c}"), (f"-low_x0 + {c}", f"rab_z0 + {c}")], "cover")
+    part.extrude_toward(s, "cover_t", kJoin, "cover plate", "y", True)
     s = part.sketch_y("back_y - 1 mm", "tongue sketch")
     for sg in ("-", "+"):
         c = f"usb_x {sg} ton_c"
@@ -257,11 +276,13 @@ def cover_features(part: NativePart) -> None:
                   pin_v0="ton_z0 + 0.6 mm", pin_v1="ton_z0 + 2.6 mm")
     part.extrude_toward(s, "bump_y - cov_in_y", kJoin, "bumps on the main PCB", "y", True)
     s = part.sketch_y("back_y - 1 mm", "screw sketch")
-    part.circle(s, "screw_x", "screw_z", "clear_d", "M3 clearance")
+    for tag, x, z in (("1", "screw_x", "screw_z"), ("2", "-screw_x2", "screw_z"), ("3", "usb_x", "-screw_z3")):
+        part.circle(s, x, z, "clear_d", f"M3 clearance {tag}")
     part.extrude_toward(s, "cover_t + 2 mm", kCut, "M3 clearance", "y", True)
     s = part.sketch_y("back_y", "countersink sketch")
-    part.circle(s, "screw_x", "screw_z", "csk_d", "countersink")
-    part.extrude(s, "csk_h", 20993, kCut, "countersink", taper="-cone_ang")
+    for tag, x, z in (("1", "screw_x", "screw_z"), ("2", "-screw_x2", "screw_z"), ("3", "usb_x", "-screw_z3")):
+        part.circle(s, x, z, "csk_d", f"countersink {tag}")
+    part.extrude(s, "csk_h", 20993, kCut, "countersinks", taper="-cone_ang")
 
 
 # ---------------------------------------------------------------------- wedge key
@@ -348,8 +369,8 @@ def ndcap_features(part: NativePart) -> None:
 PART_SPECS = {
     "chassis": ("Beam target for the XIAO ESP32-S3 Sense, chassis: slides into an openUC2 cube, two rigid rails on -x seat on the 45 deg edge chamfers "
                 "(x, z); two long flexure arms on +x click into the +x chamfers, two lands on -x limit the roll, the stick's shoulder is the hard stop. Camera block in a square seat, "
-                "XIAO from the back, USB-C from the top. PETG, print on the front face, no supports.", chassis_features, DARK),
-    "cover": ("Back cover: slides down in the dovetail, tongues press the XIAO forward, the slits are the vents. One M3 x 10 into a Ruthex insert. "
+                "XIAO from the back, USB-C from the top. Lens tube with a jaw and a lock screw for the lens, screwed out of the module. PETG, print on the front face, no supports.", chassis_features, DARK),
+    "cover": ("Back cover: lies in a recess of the back, tongues press the XIAO forward, the slits are the vents. Three M3 x 10 into Ruthex inserts. "
               "Print on the back face.", cover_features, DARK),
     "key": ("Wedge key: pushed in from the side between the camera module and the USB-C shell, clamps the module into its seat. "
             "Print on its side.", key_features, ORANGE),
@@ -391,9 +412,12 @@ def placements(ps: ParamSet, files: dict, side: bool) -> list[tuple]:
         ("wedge key", files["key"], (0, 0, 0), I3),
         ("screen cap", files["screen"], (0, 0, 0), I3),
         ("XIAO ESP32-S3 Sense", files["xiao"], xiao_o, XIAO_COLS),
-        ("thread insert", files["insert"], (p.screw_x, p.cov_in_y, p.screw_z), I3),
-        ("M3 screw", files["screw"], (p.screw_x, p.back_y, p.screw_z), SCREW_Y),
     ]
+    for tag, x, z in (("1", p.screw_x, p.screw_z), ("2", -p.screw_x2, p.screw_z), ("3", p.usb_x, -p.screw_z3)):
+        tool.append((f"thread insert {tag}", files["insert"], (x, p.cov_in_y, z), I3))
+        tool.append((f"M3 screw {tag}", files["screw"], (x, p.back_y, z), SCREW_Y))
+    tool.append(("thread insert lock", files["insert"], (-p.lock_floor, p.lock_y, 0), INSERT_X))
+    tool.append(("lock screw", files["lock_screw"], (-p.lock_base, p.lock_y, 0), SCREW_X))
     yc = p.front_y - p.mag_pocket_h + p.mag_t / 2 + p.mag_sink
     ys = p.cap_back_y + p.mag_pocket_h - p.mag_t / 2 - p.mag_sink
     for tag, z in (("top", p.mag_z), ("bottom", -p.mag_z)):
@@ -448,7 +472,7 @@ def build(app, ps: ParamSet, only: set[str] | None, do_assembly: bool) -> dict:
         if not Path(p).exists():
             raise SystemExit(f"{key}: {p} not found - adjust xiao_target.PARTS")
     files = {k: INV_DIR / f"{NAMES[k]}.ipt" for k in PART_SPECS}
-    files.update({k: PARTS[k] for k in ("cube", "puzzle", "xiao", "magnet", "insert", "screw")})
+    files.update({k: PARTS[k] for k in ("cube", "puzzle", "xiao", "magnet", "insert", "screw", "lock_screw")})
     rep = {"names": NAMES, "files": {k: str(v) for k, v in files.items()}}
     for key, (desc, fn, look) in PART_SPECS.items():
         if only and key not in only:
@@ -457,6 +481,11 @@ def build(app, ps: ParamSet, only: set[str] | None, do_assembly: bool) -> dict:
         rep[key] = _part(app, ps, files[key], desc, fn, look)
         print(json.dumps({k: v for k, v in rep[key].items() if k != "range_mm"}, indent=1))
         print("range", rep[key].get("range_mm"))
+    STL_DIR.mkdir(exist_ok=True)
+    for key in PART_SPECS:                                  # the print set lives in stl/
+        stl = files[key].with_suffix(".stl")
+        if stl.exists():
+            shutil.move(str(stl), STL_DIR / stl.name)
     if do_assembly:
         for side, name in ((False, NAMES["assembly"]), (True, NAMES["assembly"] + " - side entry")):
             asm = INV_DIR / f"{name}.iam"

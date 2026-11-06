@@ -590,24 +590,87 @@
   },
   {
    "name": "seat_clr",
-   "value": 0.1,
+   "value": 0.2,
    "unit": "mm",
    "expr": "",
    "comment": "camera module in its square seat, per side"
   },
   {
    "name": "tube_clr",
-   "value": 0.2,
+   "value": 0.4,
    "unit": "mm",
    "expr": "",
    "comment": "ring in its bore, on the diameter"
   },
   {
    "name": "lens_hole_d",
-   "value": 7.0,
+   "value": 6.9,
    "unit": "mm",
    "expr": "",
-   "comment": "hole for the lens"
+   "comment": "bore of the lens tube: the lens, screwed out of the module entirely, slides in it"
+  },
+  {
+   "name": "lens_tube_d",
+   "value": 8.9,
+   "unit": "mm",
+   "expr": "",
+   "comment": "outer diameter of the lens tube (1 mm wall), it stands free in the funnel"
+  },
+  {
+   "name": "lens_tube_y",
+   "value": 5.0,
+   "unit": "mm",
+   "expr": "",
+   "comment": "front end of the lens tube"
+  },
+  {
+   "name": "jaw_y0",
+   "value": 1.0,
+   "unit": "mm",
+   "expr": "",
+   "comment": "root of the jaw cut into the -x side of the tube"
+  },
+  {
+   "name": "jaw_z",
+   "value": 1.7,
+   "unit": "mm",
+   "expr": "",
+   "comment": "the two slits beside the jaw, centres at z +-jaw_z"
+  },
+  {
+   "name": "jaw_slit",
+   "value": 0.8,
+   "unit": "mm",
+   "expr": "",
+   "comment": "slit width"
+  },
+  {
+   "name": "lock_y",
+   "value": 2.6,
+   "unit": "mm",
+   "expr": "",
+   "comment": "lock screw M3 x 8 ISO 4762 through the -x wall, presses the jaw on the lens"
+  },
+  {
+   "name": "lock_floor",
+   "value": 11.85,
+   "unit": "mm",
+   "expr": "",
+   "comment": "floor of the head recess, |x|; the thread insert starts here"
+  },
+  {
+   "name": "lock_head_d",
+   "value": 6.4,
+   "unit": "mm",
+   "expr": "",
+   "comment": "head recess"
+  },
+  {
+   "name": "lock_l",
+   "value": 8.0,
+   "unit": "mm",
+   "expr": "",
+   "comment": "length under the head"
   },
   {
    "name": "bore_d",
@@ -674,14 +737,14 @@
   },
   {
    "name": "clr_board",
-   "value": 0.25,
+   "value": 0.5,
    "unit": "mm",
    "expr": "",
    "comment": "clearance around the PCBs"
   },
   {
    "name": "zone_clr",
-   "value": 0.3,
+   "value": 0.5,
    "unit": "mm",
    "expr": "",
    "comment": "clearance around the socket and the connector"
@@ -723,7 +786,7 @@
   },
   {
    "name": "key_clr",
-   "value": 0.08,
+   "value": 0.15,
    "unit": "mm",
    "expr": "",
    "comment": "key in its slot, per side (z)"
@@ -744,7 +807,7 @@
   },
   {
    "name": "key_blind",
-   "value": 2.2,
+   "value": 2.0,
    "unit": "mm",
    "expr": "",
    "comment": "slot runs this far into the right wall"
@@ -757,11 +820,32 @@
    "comment": "nominal key head under the left wall: 0.12 mm of stack tolerance before it stands proud"
   },
   {
-   "name": "rab_half",
+   "name": "low_x0",
+   "value": 12.0,
+   "unit": "mm",
+   "expr": "",
+   "comment": "the cover sits in a recess of the back: lower part, left edge"
+  },
+  {
+   "name": "low_x1",
+   "value": 10.3,
+   "unit": "mm",
+   "expr": "",
+   "comment": "lower part, right edge"
+  },
+  {
+   "name": "rab_x0",
+   "value": 14.05,
+   "unit": "mm",
+   "expr": "",
+   "comment": "upper part, left edge"
+  },
+  {
+   "name": "rab_x1",
    "value": 13.0,
    "unit": "mm",
    "expr": "",
-   "comment": "upper part of the cover, in a rabbet of the neck"
+   "comment": "upper part, right edge"
   },
   {
    "name": "rab_z0",
@@ -771,39 +855,11 @@
    "comment": "start of the upper part"
   },
   {
-   "name": "dov_in",
-   "value": 1.2,
+   "name": "cov_clr",
+   "value": 0.3,
    "unit": "mm",
    "expr": "",
-   "comment": "dovetail: the slot is this much wider at the cover's inner face"
-  },
-  {
-   "name": "dov_clr",
-   "value": 0.15,
-   "unit": "mm",
-   "expr": "",
-   "comment": "cover in its dovetail"
-  },
-  {
-   "name": "dov_z0",
-   "value": 20.0,
-   "unit": "mm",
-   "expr": "",
-   "comment": "dovetail ends this far below the axis"
-  },
-  {
-   "name": "dov_x0",
-   "value": 9.95,
-   "unit": "mm",
-   "expr": "",
-   "comment": "dovetail, narrow width at the back face, left"
-  },
-  {
-   "name": "dov_x1",
-   "value": 8.65,
-   "unit": "mm",
-   "expr": "",
-   "comment": "dovetail, narrow width at the back face, right"
+   "comment": "cover in its recess, per side"
   },
   {
    "name": "tongue_w",
@@ -849,17 +905,31 @@
   },
   {
    "name": "screw_x",
-   "value": 9.4,
+   "value": 9.3,
    "unit": "mm",
    "expr": "",
-   "comment": "M3 screw, cover into the neck"
+   "comment": "M3 screw 1, cover into the neck, right of the USB channel"
+  },
+  {
+   "name": "screw_x2",
+   "value": 10.2,
+   "unit": "mm",
+   "expr": "",
+   "comment": "M3 screw 2, left of the USB channel, at x = -screw_x2"
   },
   {
    "name": "screw_z",
    "value": 27.0,
    "unit": "mm",
    "expr": "",
-   "comment": ""
+   "comment": "height of screws 1 and 2"
+  },
+  {
+   "name": "screw_z3",
+   "value": 20.9,
+   "unit": "mm",
+   "expr": "",
+   "comment": "M3 screw 3 in the nose below the board, at z = -screw_z3, on the USB axis"
   },
   {
    "name": "insert_d",
@@ -1437,7 +1507,7 @@
   },
   {
    "name": "seat_w",
-   "value": 8.2,
+   "value": 8.4,
    "unit": "mm",
    "expr": "mod_w + 2 * seat_clr",
    "comment": ""
@@ -1451,7 +1521,7 @@
   },
   {
    "name": "tube_bore_d",
-   "value": 8.05,
+   "value": 8.25,
    "unit": "mm",
    "expr": "tube_d + tube_clr",
    "comment": ""
@@ -1472,14 +1542,14 @@
   },
   {
    "name": "cone_len",
-   "value": 6.5,
+   "value": 6.55,
    "unit": "mm",
    "expr": "(bore_d - lens_hole_d) / 2",
    "comment": "funnel length at 45 deg"
   },
   {
    "name": "cone_y1",
-   "value": 6.4,
+   "value": 6.45,
    "unit": "mm",
    "expr": "cone_y0 + cone_len",
    "comment": "funnel ends at the hood bore"
@@ -1570,84 +1640,84 @@
   },
   {
    "name": "pocket_x0",
-   "value": -9.78,
+   "value": -10.03,
    "unit": "mm",
    "expr": "main_x0 - clr_board",
    "comment": ""
   },
   {
    "name": "pocket_x1",
-   "value": 8.5,
+   "value": 8.75,
    "unit": "mm",
    "expr": "main_x1 + clr_board",
    "comment": ""
   },
   {
    "name": "pocket_z0",
-   "value": -17.97,
+   "value": -18.22,
    "unit": "mm",
    "expr": "main_z0 - clr_board - 0.3 mm",
    "comment": "main PCB rests here; USB-C insertion loads this floor"
   },
   {
    "name": "pocket_z1",
-   "value": 3.78,
+   "value": 4.03,
    "unit": "mm",
    "expr": "main_z1 + clr_board",
    "comment": "main PCB stops here when a plug is pulled"
   },
   {
    "name": "sense_zone_x0",
-   "value": -9.28,
+   "value": -9.53,
    "unit": "mm",
    "expr": "sense_x0 - clr_board",
    "comment": ""
   },
   {
    "name": "sense_zone_x1",
-   "value": 8.0,
+   "value": 8.25,
    "unit": "mm",
    "expr": "sense_x1 + clr_board",
    "comment": ""
   },
   {
    "name": "sense_zone_z0",
-   "value": -17.97,
+   "value": -18.22,
    "unit": "mm",
    "expr": "sense_z0 - clr_board",
    "comment": ""
   },
   {
    "name": "sd_zone_x0",
-   "value": -6.37,
+   "value": -6.57,
    "unit": "mm",
    "expr": "sd_x0 - zone_clr",
    "comment": ""
   },
   {
    "name": "sd_zone_x1",
-   "value": 6.07,
+   "value": 6.27,
    "unit": "mm",
    "expr": "sd_x1 + zone_clr",
    "comment": ""
   },
   {
    "name": "fpc_zone_x0",
-   "value": -9.07,
+   "value": -9.27,
    "unit": "mm",
    "expr": "fpc_x0 - zone_clr",
    "comment": ""
   },
   {
    "name": "fpc_zone_x1",
-   "value": 7.73,
+   "value": 7.93,
    "unit": "mm",
    "expr": "fpc_x1 + zone_clr",
    "comment": ""
   },
   {
    "name": "fpc_zone_z1",
-   "value": -10.65,
+   "value": -10.45,
    "unit": "mm",
    "expr": "fpc_z1 + zone_clr",
    "comment": ""
@@ -1675,14 +1745,14 @@
   },
   {
    "name": "key_z0",
-   "value": -2.82,
+   "value": -2.75,
    "unit": "mm",
    "expr": "sense_z1 + 0.15 mm + key_clr",
    "comment": "just above the Sense PCB"
   },
   {
    "name": "key_z1",
-   "value": 4.38,
+   "value": 4.45,
    "unit": "mm",
    "expr": "key_z0 + key_h",
    "comment": ""
@@ -1696,14 +1766,14 @@
   },
   {
    "name": "slot_z1",
-   "value": 4.46,
+   "value": 4.6,
    "unit": "mm",
    "expr": "key_z1 + key_clr",
    "comment": ""
   },
   {
    "name": "slot_x1",
-   "value": 10.7,
+   "value": 10.75,
    "unit": "mm",
    "expr": "pocket_x1 + key_blind",
    "comment": ""
@@ -1717,7 +1787,7 @@
   },
   {
    "name": "key_x1",
-   "value": 9.7,
+   "value": 9.75,
    "unit": "mm",
    "expr": "slot_x1 - 1 mm",
    "comment": "key tip, 1 mm of travel left"
@@ -1745,7 +1815,7 @@
   },
   {
    "name": "slot_back_tip",
-   "value": -7.5239,
+   "value": -7.5197,
    "unit": "mm",
    "expr": "key_y0 + (slot_x1 - usb_x0) * key_slope",
    "comment": ""
@@ -1759,7 +1829,7 @@
   },
   {
    "name": "key_back_tip",
-   "value": -7.5772,
+   "value": -7.573,
    "unit": "mm",
    "expr": "key_y0 + 0.03 mm + (key_x1 - usb_x0) * key_slope",
    "comment": ""
@@ -1779,20 +1849,6 @@
    "comment": "tongue tips"
   },
   {
-   "name": "dov_out_x0",
-   "value": 9.4045,
-   "unit": "mm",
-   "expr": "dov_x0 - dov_in * 1 mm / cover_t",
-   "comment": "dovetail cut, extended 1 mm behind the back face"
-  },
-  {
-   "name": "dov_out_x1",
-   "value": 8.1045,
-   "unit": "mm",
-   "expr": "dov_x1 - dov_in * 1 mm / cover_t",
-   "comment": ""
-  },
-  {
    "name": "csk_h",
    "value": 1.5,
    "unit": "mm",
@@ -1800,60 +1856,25 @@
    "comment": ""
   },
   {
-   "name": "dov_in_x0",
-   "value": 11.15,
+   "name": "cov_bot",
+   "value": 24.2,
    "unit": "mm",
-   "expr": "dov_x0 + dov_in",
-   "comment": ""
+   "expr": "nose_z - 0.2 mm",
+   "comment": "lower end of the cover"
   },
   {
-   "name": "dov_in_x1",
-   "value": 9.85,
+   "name": "lock_base",
+   "value": 12.3,
    "unit": "mm",
-   "expr": "dov_x1 + dov_in",
-   "comment": ""
+   "expr": "lock_floor + 0.45 mm",
+   "comment": "under the head when it clamps, |x|: 0.45 mm of travel left to the floor"
   },
   {
-   "name": "cov_x0",
-   "value": 9.8,
+   "name": "lock_tip",
+   "value": 4.3,
    "unit": "mm",
-   "expr": "dov_x0 - dov_clr",
-   "comment": ""
-  },
-  {
-   "name": "cov_x1",
-   "value": 8.5,
-   "unit": "mm",
-   "expr": "dov_x1 - dov_clr",
-   "comment": ""
-  },
-  {
-   "name": "cov_in_x0",
-   "value": 11.0,
-   "unit": "mm",
-   "expr": "dov_in_x0 - dov_clr",
-   "comment": ""
-  },
-  {
-   "name": "cov_in_x1",
-   "value": 9.7,
-   "unit": "mm",
-   "expr": "dov_in_x1 - dov_clr",
-   "comment": ""
-  },
-  {
-   "name": "cov_z0",
-   "value": 19.85,
-   "unit": "mm",
-   "expr": "dov_z0 - dov_clr",
-   "comment": ""
-  },
-  {
-   "name": "rab_w",
-   "value": 12.85,
-   "unit": "mm",
-   "expr": "rab_half - dov_clr",
-   "comment": ""
+   "expr": "lock_base - lock_l",
+   "comment": "tip of the lock screw when it clamps, |x|"
   },
   {
    "name": "bump_y",
@@ -1882,14 +1903,15 @@
   "xiao": "C:\\Users\\benir\\Documents\\openUC2-CAD-new\\workspace\\BUY\\OLD STUFF\\BUY - Seeed Studio XIAO-ESP32-S3-Sense\\BUY - Seeed Studio XIAO-ESP32-S3-Sense\\BUY - Seeed Studio XIAO-ESP32-S3-Sense.iam",
   "magnet": "C:\\Users\\benir\\Documents\\openUC2-CAD-new\\workspace\\BUY\\BUY - NeFeB-Magnet - \u00f88x3 N40 Ni.ipt",
   "insert": "C:\\Users\\benir\\Documents\\openUC2-CAD-new\\workspace\\BUY\\BUY - Ruthex - Thread insert - RX-M3Sx4.0.ipt",
-  "screw": "C:\\Users\\benir\\Documents\\openUC2-CAD-new\\workspace\\STD\\ISO 10642 - A2-70\\ISO 10642 - Countersunk head screw with hex socket - M3 x 10 - A2-70.ipt"
+  "screw": "C:\\Users\\benir\\Documents\\openUC2-CAD-new\\workspace\\STD\\ISO 10642 - A2-70\\ISO 10642 - Countersunk head screw with hex socket - M3 x 10 - A2-70.ipt",
+  "lock_screw": "C:\\Users\\benir\\Documents\\openUC2-CAD-new\\workspace\\STD\\ISO 4672 - A2-70\\ISO 4762 - Cylinder head screw with hex socket - M3 x 8 - A2-70.ipt"
  },
  "chassis": {
   "bodies": 1,
-  "features": 32,
-  "user_parameters": 185,
-  "volume_mm3": 47484.7,
-  "faces": 137,
+  "features": 36,
+  "user_parameters": 191,
+  "volume_mm3": 46541.67,
+  "faces": 164,
   "range_mm": [
    -18.4,
    -16.8,
@@ -1903,24 +1925,6 @@
   "not_parametric": [
    "arrow: fixed profile (not pinned)"
   ]
- },
- "cover": {
-  "bodies": 1,
-  "features": 6,
-  "user_parameters": 41,
-  "volume_mm3": 2157.94,
-  "faces": 38,
-  "range_mm": [
-   -12.85,
-   -16.8,
-   -19.85,
-   12.85,
-   -13.25,
-   31.5
-  ],
-  "health": [],
-  "warnings": [],
-  "not_parametric": []
  },
  "top": {
   "removed": 0,
@@ -1947,28 +1951,80 @@
     ]
    },
    "chassis / XIAO ESP32-S3 Sense": {
-    "mm3": 36.221,
+    "mm3": 34.935,
     "boxes": [
      [
       -5.41,
       -6.5,
-      4.46,
+      4.6,
       5.77,
       -4.85,
       6.64
      ]
     ]
    },
-   "chassis / thread insert": {
+   "chassis / thread insert 1": {
     "mm3": 4.191,
     "boxes": [
      [
-      7.04,
+      6.94,
       -13.4,
       24.64,
-      11.76,
+      11.66,
       -10.59,
       29.35
+     ]
+    ]
+   },
+   "chassis / thread insert 2": {
+    "mm3": 4.191,
+    "boxes": [
+     [
+      -12.56,
+      -13.4,
+      24.64,
+      -7.84,
+      -10.59,
+      29.35
+     ]
+    ]
+   },
+   "chassis / thread insert 3": {
+    "mm3": 4.191,
+    "boxes": [
+     [
+      -2.99,
+      -13.4,
+      -23.26,
+      1.73,
+      -10.59,
+      -18.55
+     ]
+    ]
+   },
+   "chassis / thread insert lock": {
+    "mm3": 4.095,
+    "boxes": [
+     [
+      -10.65,
+      0.24,
+      -2.36,
+      -7.84,
+      4.96,
+      2.35
+     ]
+    ]
+   },
+   "chassis / lock screw": {
+    "mm3": 0.521,
+    "boxes": [
+     [
+      -4.45,
+      1.26,
+      -1.15,
+      -4.3,
+      3.94,
+      1.15
      ]
     ]
    },
@@ -1986,12 +2042,12 @@
     ]
    },
    "wedge key / XIAO ESP32-S3 Sense": {
-    "mm3": 61.267,
+    "mm3": 61.29,
     "boxes": [
      [
       -4.0,
       -5.15,
-      -2.82,
+      -2.75,
       4.0,
       -5.1,
       4.0
@@ -1999,23 +2055,62 @@
      [
       -5.41,
       -6.5,
-      -2.82,
+      -2.75,
       5.77,
       -5.75,
-      4.38
+      4.45
      ]
     ]
    },
-   "thread insert / M3 screw": {
+   "thread insert 1 / M3 screw 1": {
     "mm3": 8.535,
     "boxes": [
      [
-      7.9,
+      7.8,
       -14.57,
       25.5,
-      10.9,
+      10.8,
       -10.63,
       28.5
+     ]
+    ]
+   },
+   "thread insert 2 / M3 screw 2": {
+    "mm3": 8.535,
+    "boxes": [
+     [
+      -11.7,
+      -14.57,
+      25.5,
+      -8.7,
+      -10.63,
+      28.5
+     ]
+    ]
+   },
+   "thread insert 3 / M3 screw 3": {
+    "mm3": 8.535,
+    "boxes": [
+     [
+      -2.13,
+      -14.57,
+      -22.4,
+      0.87,
+      -10.63,
+      -19.4
+     ]
+    ]
+   },
+   "thread insert lock / lock screw": {
+    "mm3": 8.535,
+    "boxes": [
+     [
+      -11.82,
+      1.1,
+      -1.5,
+      -7.88,
+      4.1,
+      1.5
      ]
     ]
    }
@@ -2064,15 +2159,51 @@
     "reference": false
    },
    {
-    "role": "thread insert",
-    "occurrence": "BUY - Ruthex - Thread insert - RX-M3Sx4.0:1",
+    "role": "thread insert 1",
+    "occurrence": "BUY - Ruthex - Thread insert - RX-M3Sx4.0:2",
     "file": "C:\\Users\\benir\\Documents\\openUC2-CAD-new\\workspace\\BUY\\BUY - Ruthex - Thread insert - RX-M3Sx4.0.ipt",
     "reference": false
    },
    {
-    "role": "M3 screw",
-    "occurrence": "ISO 10642 - Countersunk head screw with hex socket - M3 x 10 - A2-70:1",
+    "role": "M3 screw 1",
+    "occurrence": "ISO 10642 - Countersunk head screw with hex socket - M3 x 10 - A2-70:2",
     "file": "C:\\Users\\benir\\Documents\\openUC2-CAD-new\\workspace\\STD\\ISO 10642 - A2-70\\ISO 10642 - Countersunk head screw with hex socket - M3 x 10 - A2-70.ipt",
+    "reference": false
+   },
+   {
+    "role": "thread insert 2",
+    "occurrence": "BUY - Ruthex - Thread insert - RX-M3Sx4.0:3",
+    "file": "C:\\Users\\benir\\Documents\\openUC2-CAD-new\\workspace\\BUY\\BUY - Ruthex - Thread insert - RX-M3Sx4.0.ipt",
+    "reference": false
+   },
+   {
+    "role": "M3 screw 2",
+    "occurrence": "ISO 10642 - Countersunk head screw with hex socket - M3 x 10 - A2-70:3",
+    "file": "C:\\Users\\benir\\Documents\\openUC2-CAD-new\\workspace\\STD\\ISO 10642 - A2-70\\ISO 10642 - Countersunk head screw with hex socket - M3 x 10 - A2-70.ipt",
+    "reference": false
+   },
+   {
+    "role": "thread insert 3",
+    "occurrence": "BUY - Ruthex - Thread insert - RX-M3Sx4.0:4",
+    "file": "C:\\Users\\benir\\Documents\\openUC2-CAD-new\\workspace\\BUY\\BUY - Ruthex - Thread insert - RX-M3Sx4.0.ipt",
+    "reference": false
+   },
+   {
+    "role": "M3 screw 3",
+    "occurrence": "ISO 10642 - Countersunk head screw with hex socket - M3 x 10 - A2-70:4",
+    "file": "C:\\Users\\benir\\Documents\\openUC2-CAD-new\\workspace\\STD\\ISO 10642 - A2-70\\ISO 10642 - Countersunk head screw with hex socket - M3 x 10 - A2-70.ipt",
+    "reference": false
+   },
+   {
+    "role": "thread insert lock",
+    "occurrence": "BUY - Ruthex - Thread insert - RX-M3Sx4.0:5",
+    "file": "C:\\Users\\benir\\Documents\\openUC2-CAD-new\\workspace\\BUY\\BUY - Ruthex - Thread insert - RX-M3Sx4.0.ipt",
+    "reference": false
+   },
+   {
+    "role": "lock screw",
+    "occurrence": "ISO 4762 - Cylinder head screw with hex socket - M3 x 8 - A2-70:1",
+    "file": "C:\\Users\\benir\\Documents\\openUC2-CAD-new\\workspace\\STD\\ISO 4672 - A2-70\\ISO 4762 - Cylinder head screw with hex socket - M3 x 8 - A2-70.ipt",
     "reference": false
    },
    {
@@ -2118,10 +2249,10 @@
     ]
    },
    "chassis / XIAO ESP32-S3 Sense": {
-    "mm3": 36.221,
+    "mm3": 34.935,
     "boxes": [
      [
-      4.46,
+      4.6,
       -6.5,
       -5.77,
       6.64,
@@ -2130,16 +2261,68 @@
      ]
     ]
    },
-   "chassis / thread insert": {
+   "chassis / thread insert 1": {
     "mm3": 4.191,
     "boxes": [
      [
       24.64,
       -13.4,
-      -11.76,
+      -11.66,
       29.35,
       -10.59,
-      -7.04
+      -6.94
+     ]
+    ]
+   },
+   "chassis / thread insert 2": {
+    "mm3": 4.191,
+    "boxes": [
+     [
+      24.64,
+      -13.4,
+      7.84,
+      29.35,
+      -10.59,
+      12.56
+     ]
+    ]
+   },
+   "chassis / thread insert 3": {
+    "mm3": 4.191,
+    "boxes": [
+     [
+      -23.26,
+      -13.4,
+      -1.73,
+      -18.55,
+      -10.59,
+      2.99
+     ]
+    ]
+   },
+   "chassis / thread insert lock": {
+    "mm3": 4.095,
+    "boxes": [
+     [
+      -2.36,
+      0.24,
+      7.84,
+      2.35,
+      4.96,
+      10.65
+     ]
+    ]
+   },
+   "chassis / lock screw": {
+    "mm3": 0.519,
+    "boxes": [
+     [
+      -1.15,
+      1.26,
+      4.3,
+      1.15,
+      3.94,
+      4.45
      ]
     ]
    },
@@ -2157,10 +2340,10 @@
     ]
    },
    "wedge key / XIAO ESP32-S3 Sense": {
-    "mm3": 61.267,
+    "mm3": 61.29,
     "boxes": [
      [
-      -2.82,
+      -2.75,
       -5.15,
       -4.0,
       4.0,
@@ -2168,25 +2351,64 @@
       4.0
      ],
      [
-      -2.82,
+      -2.75,
       -6.5,
       -5.77,
-      4.38,
+      4.45,
       -5.75,
       5.41
      ]
     ]
    },
-   "thread insert / M3 screw": {
+   "thread insert 1 / M3 screw 1": {
     "mm3": 8.535,
     "boxes": [
      [
       25.5,
       -14.57,
-      -10.9,
+      -10.8,
       28.5,
       -10.63,
-      -7.9
+      -7.8
+     ]
+    ]
+   },
+   "thread insert 2 / M3 screw 2": {
+    "mm3": 8.535,
+    "boxes": [
+     [
+      25.5,
+      -14.57,
+      8.7,
+      28.5,
+      -10.63,
+      11.7
+     ]
+    ]
+   },
+   "thread insert 3 / M3 screw 3": {
+    "mm3": 8.535,
+    "boxes": [
+     [
+      -22.4,
+      -14.57,
+      -0.87,
+      -19.4,
+      -10.63,
+      2.13
+     ]
+    ]
+   },
+   "thread insert lock / lock screw": {
+    "mm3": 8.535,
+    "boxes": [
+     [
+      -1.5,
+      1.1,
+      7.88,
+      1.5,
+      4.1,
+      11.82
      ]
     ]
    }
@@ -2235,15 +2457,51 @@
     "reference": false
    },
    {
-    "role": "thread insert",
-    "occurrence": "BUY - Ruthex - Thread insert - RX-M3Sx4.0:1",
+    "role": "thread insert 1",
+    "occurrence": "BUY - Ruthex - Thread insert - RX-M3Sx4.0:2",
     "file": "C:\\Users\\benir\\Documents\\openUC2-CAD-new\\workspace\\BUY\\BUY - Ruthex - Thread insert - RX-M3Sx4.0.ipt",
     "reference": false
    },
    {
-    "role": "M3 screw",
-    "occurrence": "ISO 10642 - Countersunk head screw with hex socket - M3 x 10 - A2-70:1",
+    "role": "M3 screw 1",
+    "occurrence": "ISO 10642 - Countersunk head screw with hex socket - M3 x 10 - A2-70:2",
     "file": "C:\\Users\\benir\\Documents\\openUC2-CAD-new\\workspace\\STD\\ISO 10642 - A2-70\\ISO 10642 - Countersunk head screw with hex socket - M3 x 10 - A2-70.ipt",
+    "reference": false
+   },
+   {
+    "role": "thread insert 2",
+    "occurrence": "BUY - Ruthex - Thread insert - RX-M3Sx4.0:3",
+    "file": "C:\\Users\\benir\\Documents\\openUC2-CAD-new\\workspace\\BUY\\BUY - Ruthex - Thread insert - RX-M3Sx4.0.ipt",
+    "reference": false
+   },
+   {
+    "role": "M3 screw 2",
+    "occurrence": "ISO 10642 - Countersunk head screw with hex socket - M3 x 10 - A2-70:3",
+    "file": "C:\\Users\\benir\\Documents\\openUC2-CAD-new\\workspace\\STD\\ISO 10642 - A2-70\\ISO 10642 - Countersunk head screw with hex socket - M3 x 10 - A2-70.ipt",
+    "reference": false
+   },
+   {
+    "role": "thread insert 3",
+    "occurrence": "BUY - Ruthex - Thread insert - RX-M3Sx4.0:4",
+    "file": "C:\\Users\\benir\\Documents\\openUC2-CAD-new\\workspace\\BUY\\BUY - Ruthex - Thread insert - RX-M3Sx4.0.ipt",
+    "reference": false
+   },
+   {
+    "role": "M3 screw 3",
+    "occurrence": "ISO 10642 - Countersunk head screw with hex socket - M3 x 10 - A2-70:4",
+    "file": "C:\\Users\\benir\\Documents\\openUC2-CAD-new\\workspace\\STD\\ISO 10642 - A2-70\\ISO 10642 - Countersunk head screw with hex socket - M3 x 10 - A2-70.ipt",
+    "reference": false
+   },
+   {
+    "role": "thread insert lock",
+    "occurrence": "BUY - Ruthex - Thread insert - RX-M3Sx4.0:5",
+    "file": "C:\\Users\\benir\\Documents\\openUC2-CAD-new\\workspace\\BUY\\BUY - Ruthex - Thread insert - RX-M3Sx4.0.ipt",
+    "reference": false
+   },
+   {
+    "role": "lock screw",
+    "occurrence": "ISO 4762 - Cylinder head screw with hex socket - M3 x 8 - A2-70:1",
+    "file": "C:\\Users\\benir\\Documents\\openUC2-CAD-new\\workspace\\STD\\ISO 4672 - A2-70\\ISO 4762 - Cylinder head screw with hex socket - M3 x 8 - A2-70.ipt",
     "reference": false
    },
    {

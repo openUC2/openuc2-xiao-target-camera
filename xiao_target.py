@@ -1,4 +1,4 @@
-"""XIAO ESP32-S3 Sense beam target for the openUC2 cube, rev D - parameters and design checks (no Inventor).
+"""XIAO ESP32-S3 Sense beam target for the openUC2 cube - parameters and design checks (no Inventor).
 
     python xiao_target.py                          # table + checks + optics + flexure numbers
     python xiao_target.py --set screen_d=21 --set arm_t=1.2
@@ -28,6 +28,7 @@ sys.path.insert(0, str(HERE))
 from cadlib.params import D, P, ParamSet, parse_sets  # noqa: E402
 
 INV_DIR = HERE / "INVENTOR"
+STL_DIR = HERE / "stl"
 NAMES = {
     "assembly": "ASS - 9039 - CAMTARXIA - V04",
     "chassis": "PRT - 9040 - CAMTARXIA - V04",
@@ -45,6 +46,7 @@ PARTS = {
     "magnet": CADNEW / "BUY" / "BUY - NeFeB-Magnet - ø8x3 N40 Ni.ipt",
     "insert": CADNEW / "BUY" / "BUY - Ruthex - Thread insert - RX-M3Sx4.0.ipt",
     "screw": CADNEW / "STD" / "ISO 10642 - A2-70" / "ISO 10642 - Countersunk head screw with hex socket - M3 x 10 - A2-70.ipt",
+    "lock_screw": CADNEW / "STD" / "ISO 4672 - A2-70" / "ISO 4762 - Cylinder head screw with hex socket - M3 x 8 - A2-70.ipt",
 }
 
 
@@ -140,9 +142,18 @@ def parameters() -> list:
         P("cover_top", 31.5, comment="the cover ends here: above it the USB channel is open at the back (the plug and the cable go in from there)"),
         P("slope_z0", 23.0, comment="the front slope starts here on the front face (45 deg, prints without support)"),
         # ---- camera seat
-        P("seat_clr", 0.1, comment="camera module in its square seat, per side"),
-        P("tube_clr", 0.2, comment="ring in its bore, on the diameter"),
-        P("lens_hole_d", 7.0, comment="hole for the lens"),
+        P("seat_clr", 0.2, comment="camera module in its square seat, per side"),
+        P("tube_clr", 0.4, comment="ring in its bore, on the diameter"),
+        P("lens_hole_d", 6.9, comment="bore of the lens tube: the lens, screwed out of the module entirely, slides in it"),
+        P("lens_tube_d", 8.9, comment="outer diameter of the lens tube (1 mm wall), it stands free in the funnel"),
+        P("lens_tube_y", 5.0, comment="front end of the lens tube"),
+        P("jaw_y0", 1.0, comment="root of the jaw cut into the -x side of the tube"),
+        P("jaw_z", 1.7, comment="the two slits beside the jaw, centres at z +-jaw_z"),
+        P("jaw_slit", 0.8, comment="slit width"),
+        P("lock_y", 2.6, comment="lock screw M3 x 8 ISO 4762 through the -x wall, presses the jaw on the lens"),
+        P("lock_floor", 11.85, comment="floor of the head recess, |x|; the thread insert starts here"),
+        P("lock_head_d", 6.4, comment="head recess"),
+        P("lock_l", 8.0, comment="length under the head"),
         P("bore_d", 20.0, comment="hood bore in front of the lens"),
         P("cone_ang", 45.0, "deg", comment="funnel from the lens hole to the hood bore (prints without support)"),
         P("r_bar", 1.0, comment="handle corners"),
@@ -153,35 +164,36 @@ def parameters() -> list:
         P("r_slope", 2.5, comment="edges of the front slope"),
         P("seat_c", 0.5, comment="chamfer at the hood bore; the caps' ring centres on it"),
         # ---- board pocket (the XIAO stack is clamped: main PCB back on the cover's tongues, Sense PCB front on two ledges)
-        P("clr_board", 0.25, comment="clearance around the PCBs"),
-        P("zone_clr", 0.3, comment="clearance around the socket and the connector"),
+        P("clr_board", 0.5, comment="clearance around the PCBs"),
+        P("zone_clr", 0.5, comment="clearance around the socket and the connector"),
         P("flex_gap", 0.75, comment="front of the socket zone: free for the flex in front of the module's back plane"),
         P("usb_ch_w", 13.6, comment="USB-C plug channel (x)"),
         P("usb_ch_t", 7.2, comment="USB-C plug channel (y)"),
         # ---- wedge key behind the camera module (no microSD card in this tool)
         P("key_gap", 0.05, comment="key to the USB-C shell"),
         P("key_h", 7.2, comment="key height"),
-        P("key_clr", 0.08, comment="key in its slot, per side (z)"),
+        P("key_clr", 0.15, comment="key in its slot, per side (z)"),
         P("key_slope", 0.0833, "ul", comment="wedge slope of the key's BACK face (1:12, self-locking); the front stays parallel to the module"),
         P("key_press", 0.05, comment="key presses the module by this in its nominal position"),
-        P("key_blind", 2.2, comment="slot runs this far into the right wall"),
+        P("key_blind", 2.0, comment="slot runs this far into the right wall"),
         P("key_sink", 1.5, comment="nominal key head under the left wall: 0.12 mm of stack tolerance before it stands proud"),
         # ---- back cover
-        P("rab_half", 13.0, comment="upper part of the cover, in a rabbet of the neck"),
+        P("low_x0", 12.0, comment="the cover sits in a recess of the back: lower part, left edge"),
+        P("low_x1", 10.3, comment="lower part, right edge"),
+        P("rab_x0", 14.05, comment="upper part, left edge"),
+        P("rab_x1", 13.0, comment="upper part, right edge"),
         P("rab_z0", 22.0, comment="start of the upper part"),
-        P("dov_in", 1.2, comment="dovetail: the slot is this much wider at the cover's inner face"),
-        P("dov_clr", 0.15, comment="cover in its dovetail"),
-        P("dov_z0", 20.0, comment="dovetail ends this far below the axis"),
-        P("dov_x0", 9.95, comment="dovetail, narrow width at the back face, left"),
-        P("dov_x1", 8.65, comment="dovetail, narrow width at the back face, right"),
+        P("cov_clr", 0.3, comment="cover in its recess, per side"),
         P("tongue_w", 5.0, comment="spring tongues of the cover"),
         P("tongue_l", 11.0, comment=""),
         P("ton_c", 4.6, comment="tongue centres at usb_x +- ton_c"),
         P("ton_z1", -1.0, comment="tongue roots"),
         P("slit_w", 1.2, comment="slits around the tongues (also the vents)"),
         P("bump_press", 0.1, comment="tongue bumps press the main PCB by this"),
-        P("screw_x", 9.4, comment="M3 screw, cover into the neck"),
-        P("screw_z", 27.0, comment=""),
+        P("screw_x", 9.3, comment="M3 screw 1, cover into the neck, right of the USB channel"),
+        P("screw_x2", 10.2, comment="M3 screw 2, left of the USB channel, at x = -screw_x2"),
+        P("screw_z", 27.0, comment="height of screws 1 and 2"),
+        P("screw_z3", 20.9, comment="M3 screw 3 in the nose below the board, at z = -screw_z3, on the USB axis"),
         P("insert_d", 4.0, comment="hole for the Ruthex M3 insert"),
         P("insert_h", 8.2, comment="deep enough for the M3 x 10 tip"),
         P("csk_d", 6.4, comment="countersink"),
@@ -322,17 +334,10 @@ def parameters() -> list:
         D("key_notch_y", "slot_back_head + 1 mm * key_slope", comment="notch to lever the key out"),
         # ---- derived: cover
         D("ton_z0", "ton_z1 - tongue_l", comment="tongue tips"),
-        D("dov_out_x0", "dov_x0 - dov_in * 1 mm / cover_t", comment="dovetail cut, extended 1 mm behind the back face"),
-        D("dov_out_x1", "dov_x1 - dov_in * 1 mm / cover_t"),
         D("csk_h", "(csk_d - clear_d) / 2"),
-        D("dov_in_x0", "dov_x0 + dov_in"),
-        D("dov_in_x1", "dov_x1 + dov_in"),
-        D("cov_x0", "dov_x0 - dov_clr"),
-        D("cov_x1", "dov_x1 - dov_clr"),
-        D("cov_in_x0", "dov_in_x0 - dov_clr"),
-        D("cov_in_x1", "dov_in_x1 - dov_clr"),
-        D("cov_z0", "dov_z0 - dov_clr"),
-        D("rab_w", "rab_half - dov_clr"),
+        D("cov_bot", "nose_z - 0.2 mm", comment="lower end of the cover"),
+        D("lock_base", "lock_floor + 0.45 mm", comment="under the head when it clamps, |x|: 0.45 mm of travel left to the floor"),
+        D("lock_tip", "lock_base - lock_l", comment="tip of the lock screw when it clamps, |x|"),
         D("bump_y", "pcb_back_y + bump_press", comment="top of the bumps"),
     ]
 
@@ -447,7 +452,6 @@ def checks(ps: ParamSet) -> list[tuple[str, str]]:
     need(p.pad_end <= p.stop_z - p.stop_lead - 0.3 + eps, "pad reaches the stick's shoulder")
     need(p.land_x >= p.bar_half + 0.2 - eps, "land does not stand out of the stick")
     need(p.usb_ch_y1 <= p.stick_front - 3.0 + eps, "stick's web in front of the USB channel under 3 mm")
-    need(p.cover_top >= p.screw_z + p.csk_d / 2 + 0.8 - eps, "screw head beyond the cover")
     # arms
     need(p.pad_in - fx["d_pass"] >= p.neck_half + 0.1 - eps, f"pad hits the neck when passing the throat ({fx['d_pass']:.2f} mm)")
     need(p.arm_in - fx["d_far"] >= p.body_right + 0.1 - eps, f"arm hits the body when passing the throat ({fx['d_far']:.2f} mm)")
@@ -475,11 +479,22 @@ def checks(ps: ParamSet) -> list[tuple[str, str]]:
     need(p.usb_ch_y1 > p.usb_y + 3.3, "USB channel too shallow for a 6.6 mm plug")
     need(p.usb_y - 3.3 > p.cov_in_y - eps, "USB channel behind the cover")
     # cover
-    need(p.pocket_x0 >= -p.dov_x0 and p.pocket_x1 <= p.dov_x1, "XIAO does not pass the cover opening")
-    need(p.body_right - p.dov_in_x1 >= 1.0 - eps, "wall behind the dovetail under 1 mm")
-    need(p.body_bot - p.dov_z0 >= 0.8 - eps, "floor under the dovetail under 0.8 mm")
-    need(p.screw_x - p.insert_d / 2 >= p.usb_ch_x1 + 0.8 - eps and p.screw_x + p.insert_d / 2 <= p.neck_half - 0.8 + eps, "insert does not fit the neck wall")
-    need(p.screw_x + p.csk_d / 2 <= p.rab_w - 0.2 + eps, "screw head beyond the cover")
+    need(p.pocket_x0 >= -p.low_x0 + 1.5 - eps and p.pocket_x1 <= p.low_x1 - 1.0 + eps, "cover does not rest beside the pocket")
+    need(p.body_right - p.low_x1 >= 1.0 - eps, "wall beside the cover under 1 mm")
+    need(p.screw_x - p.insert_d / 2 >= p.usb_ch_x1 + 0.7 - eps and p.screw_x + p.csk_d / 2 <= p.rab_x1 - p.cov_clr - 0.2 + eps, "screw 1 does not fit between USB channel and cover edge")
+    need(-p.screw_x2 + p.insert_d / 2 <= p.usb_ch_x0 - 0.7 + eps and p.screw_x2 + p.csk_d / 2 <= p.rab_x0 - p.cov_clr - 0.2 + eps, "screw 2 does not fit between USB channel and cover edge")
+    need(p.screw_z3 - p.insert_d / 2 >= -p.pocket_z0 + 0.6 - eps and p.screw_z3 + p.insert_d / 2 <= p.nose_z - 1.0 + eps, "insert of screw 3 does not fit under the pocket")
+    need(p.screw_z3 + p.csk_d / 2 <= p.cov_bot + eps, "head of screw 3 beyond the cover")
+    need(p.cover_top >= p.screw_z + p.csk_d / 2 + 0.8 - eps, "screw head beyond the cover (top)")
+    # lens tube and lock
+    need((p.lens_hole_d - p.lens_d) / 2 >= 0.15 - eps, "lens does not slide in the tube")
+    need(p.lens_tube_d - p.lens_hole_d >= 1.6 - eps, "lens tube wall too thin")
+    r_lock = p.lens_hole_d / 2 + p.lock_y - p.cone_y0
+    need(r_lock >= p.lens_tube_d / 2 + 1.0 - eps, "funnel too tight around the tube at the lock screw")
+    need(p.lock_floor - 5.0 >= r_lock + 0.3 - eps, "insert hole of the lock screw breaks into the funnel")
+    need(p.lock_tip <= p.lens_tube_d / 2 and p.lock_tip >= p.lens_tube_d / 2 - 0.3, "lock screw does not reach the jaw")
+    need(p.lock_base + 3.0 <= p.body_left - 0.2 + eps, "head of the lock screw stands proud of the wall")
+    need(p.jaw_y0 <= p.lock_y - 1.0 and p.lock_y <= p.lens_tube_y - 1.0, "lock screw beside the jaw")
     # caps
     need(p.cap_w <= p.body_right + eps, "cap wider than the chassis on the right")
     need(p.mag_z - p.mag_pocket_d / 2 >= p.seat_r + 0.6 - eps, "magnet pockets cut the hood seat")
@@ -506,7 +521,7 @@ def checks(ps: ParamSet) -> list[tuple[str, str]]:
 
 
 def report(ps: ParamSet) -> int:
-    print("XIAO ESP32-S3 Sense beam target, rev D")
+    print("XIAO ESP32-S3 Sense beam target")
     for row in ps.table():
         expr = f"  = {row['expr']}" if row["expr"] else ""
         print(f"  {row['name']:<14} {row['value']:>9.4g} {row['unit']:<3} {row['comment']}{expr}")

@@ -1,112 +1,39 @@
-# XIAO ESP32-S3 Sense beam target for the cube (rev D, 2026-11-05)
+# XIAO ESP32-S3 Sense beam target for the cube
 
-Rev A (hanging on the top bosses, 2026-10-31) is kept in `rev_a/`. Rev B (chassis PRT-9031, cover PRT-9032, ASS-9030) stays in `INVENTOR/` with Benedict's
-edits of 11:47 (arms 2 mm, nose to z -23.5). Rev C (PRT-9037, PRT-9038, ASS-9036) stays in `INVENTOR/`, its scripts and note in `rev_c/`.
-Rev D is PRT-9040 + PRT-9041 + ASS-9039 and shares the key and the caps (9033-9035) with rev B and C.
+Older variants are in the git history (commit `ec8295e`).
 
-## 0a. What changed from rev C to rev D, and why
+## 1. What it has to do
 
-Benedict's review of rev C: "there is no groove in the cube", so the pads on the flat wall do not hold stably; a longer stick to pull it in and out; a lock or end stop against overshooting; in the end it must be centred.
+Slide in, from the top with or without a puzzle piece or from the side, and observe the centre of the optical axis as precisely as a printed part allows. No face outside the cube can be used: the top of a puzzle piece and a bare cube face are 5 mm apart. So the tool locates on the cube's 45 deg edge chamfers, which are the same everywhere.
 
-- **The ridges sit in a real groove again.** Rev C's ridges pressed on the flat +x throat wall: enough to load the V, but nothing to drop into, so no click and no help in z. The only grooves a cube has are its chamfers, so each ridge now sits on the +x chamfer at z +-20.65, x 17.35, just below the corner of chamfer and throat wall (a 135 deg corner). This costs nothing against the roll: section 0 still holds, the chamfer pushes through the axis, but the roll has been held by the lands since rev C, and the moment a rail can take is the same for a pad on the wall and in the corner: preload / (1 +- H / 22 mm).
-- **A hard stop that works from the top and from the side.** Before, an overshoot was stopped only by the far rail on the far chamfer, against the springs: a hard push could take the tool over it into the far throat. A collar on the outside cannot work: the top of a puzzle piece and a bare cube face are 5 mm apart. All ports are the same size, so a rigid part that passes the near port cannot hit the far one on its own. The stop therefore limits the sideways shift instead: to go deeper the far rail must climb its chamfer, which moves the tool toward +x, and the +x shoulder of the stick (x 16.1) enters the near throat and meets the wall after 0.93 mm. The far rail is taller than the near one (18.4 instead of 18.0), so at that point it still bites 0.44 mm on the chamfer. Measured on the STEP: the rigid parts go 0.9 mm past the seat at any shift, top and side. Let go and the springs lift the tool back into the seat.
-  The shoulder is placed so that it stays out of the way on the way in: while the near rail needs the throat (shift 0.97 mm) it is still above the lip, and in the puzzle piece it has 0.18 mm to spare.
-- **Longer stick.** Top at z 70 instead of 38 (as in Benedict's sketch), +-16.1 wide, grip waist at z 57, a 14 mm thick U section. Above z 31.5 the USB channel is open at the back: the plug is pushed down with a finger from there and the cable lies in the channel. The cover ends at z 31.5.
-- **Softer lead-in.** The far arm's tip is longer (slope 3.6 mm), so the push peak falls in spite of the shorter arm.
-
-| | rev C (1.5 mm arm) | rev D (1.4 mm arm) |
-| --- | --- | --- |
-| spring contact | flat throat wall | corner of chamfer and wall, click |
-| root to ridge | 20.4 mm | 19.15 mm |
-| seated, each arm / into the V | 8.4 / 16.8 N | 7.1 / 14.2 N |
-| arm travel, strain | 2.39 mm, 1.3 % | 2.49 mm (2.89 at the far rail), 1.7 % |
-| push in, peak then sliding | 23, then 14 N | 19, then 15 N |
-| straight pull, start then peak | 28, then about 47 N | 24, then 36 N |
-| overshoot | no hard stop | hard stop at 0.9 mm, after about 36 N of spring |
-| load at the top of the stick before a rail lifts | 6.3 N (+x), 24.5 N (-x), top at z 38 | 3.5 N (+x), 6.7 N (-x), top at z 70 |
-| free rock | +-0.13 to 0.25 deg | same |
-
-Correction: rev C's "straight pull about 28 N" was only the start of the movement. The springs get stronger along the way, the peak was about 47 N. Rock the tool to take it out (section 7).
-
-The longer stick has a price: the same preload now lifts a rail at half the load. A tool that is pushed or pulled at the top rocks, and comes back when released; a USB cable hanging from the top is well below that. For a measurement let go of the stick. `top_z` shortens it if that bothers.
-
-## 0. What changed from rev B to rev C, and why
-
-Benedict's review of rev B: the tool needs something that keeps it parallel and in the centre; he circled the four corners and tried elongating the part into the far port.
-
-**Rev B had a real fault, and this note claimed otherwise.** It said the two rails define "x, z and all three tilts". They do not. A contact on a 45 deg chamfer pushes almost through the
-axis: the force lines of all four contacts pass 1.4 mm from it. Such a contact cannot resist a rotation about the beam; the tool slides around the chamfers like a square in a circle. Only the
-width of the rail flats (1.3 mm) and a weak spring term held the roll: a few tenths of a newton on top of the handle would start it rocking, until the neck hits the throat. A USB cable does that.
-
-**Elongating was the right idea.** A throat wall pushes across the axis, at 22 mm from it: 16 times the lever. Rev C:
-
-- The **rails stay**: the V on the chamfers still fixes x and z, the two numbers that matter.
-- The **arms are longer** (root to ridge 20.4 mm instead of 15.5) and press on the **+x throat walls of the near and the far port** instead of on the chamfers. Their force still loads the V, now with a lever against the roll. The pads have a ridge, not a flat: the arm tilts as it bends, a flat would stand on one edge.
-- **Two rigid lands on -x**, near port and far port, stand 0.05-0.1 mm off the -x throat walls. They touch only when something tries to roll the tool: one for each direction. They are stops, not locators.
-- The **nose** reaches into the far throat, z -24.4, still inside the cube's envelope.
-
-Benedict's two edits, and what became of them: the nose is kept, but on +x it sat on the sprung pad, which moves 1.4 mm away from the wall when seated, so it would not have touched; rev C takes the rigid contact on the -x side. His 2 mm arms on the short rev B arm
-need 71 N each through the throat at 3.2 % strain. On the longer arm 2 mm is possible (1.7 %), but the straight pull-out rises to about 65 N, more than a cube's seat on its plate is likely to take, so rev C starts at 1.5 mm (`arm_t`, `arm_out`).
-
-| | rev B | rev C (1.5 mm) | rev C with 1.25 / 2 mm arms |
-| --- | --- | --- | --- |
-| spring force seated, each arm | 3.8 N | 8.4 N | 4.9 / 19.6 N |
-| into the V | 7.7 N | 16.8 N | 9.8 / 39 N |
-| lever of the springs about the beam | 1.4 mm | 22.4 mm | |
-| free rock | until the neck hits, degrees | +-0.13 deg (side) to +-0.25 deg (top), between the lands | |
-| load on top of the handle before a land lifts | none: no land | 6.3 N (+x), 24.5 N (-x) | 3.7 / 14.7 N (+x) |
-| arm travel, strain | 3.47 mm, 1.6 % | 2.39 mm, 1.3 % | 1.1 / 1.7 % |
-| push in, peak then sliding | about 19 N | about 23 N, then 14 N | 15 then 8 / 39 then 33 N |
-| straight pull out | | about 28 N, less when rocked (see 7) | 16 / 65 N |
-
-All forces are estimates for PETG with mu 0.25. The rock moves the image centre by about 2 mm x 0.25 deg = 0.01 mm, because the tool turns about a point 2 mm from the axis.
-
-## 1. The ask (Benedict, 2026-11-05)
-
-> Re-iterate the design to make it more beautiful / visually appealing and robust. Between the camera and the
-> XIAO there is nothing, so if the camera is floating it's not very robust. Take all the knowledge from this
-> session into account. In the end we want a camera that we can slide in and observe the center of the optical
-> axis maximal precise. We should be able to do that from the side or from top, where from top we may have the
-> puzzle pieces - so maybe it's smarter to have some kind of snap fit (flexure spring) that fits into the
-> chamfers of the cube since those are rotational symmetric and don't have the issue of the 5 mm step. Should
-> have a nice industrial design and be practical. Screen with magnets still sounds good to me?
-
-## 2. What changed from rev A to rev B
-
-| rev A | rev B | why |
-| --- | --- | --- |
-| cap on the top bosses | two rigid rails + two flexure pads on the 45 deg edge chamfers | no 5 mm step: works under a puzzle piece and from the side |
-| camera module floating on its flex behind a thin wall | module clamped between its seat and a wedge key | the module has a solid back; the board does not load it |
-| screen tube added through the beam-side port | screen cap on the tool, everything inside the port's +-17 | goes in as one piece, also between two neighbouring cubes |
-| sensor at the cube centre | sensor at y -4.5, screen at y +15.5 | 20 mm lens-to-screen distance fits inside the port |
-| riser and foot | gone | a cube on the table is the stand; the chamfers do not care about the height |
-| print on the cap, cover in slots | print on the front, dovetail cover | no bridges except the magnet pockets and the key slot |
-
-## 3. Parts (provisional numbers, native parametric Inventor parts in `INVENTOR/`)
+## 2. Parts (provisional numbers, native parametric Inventor parts in `INVENTOR/`)
 
 | part | what | print (no supports) |
 | --- | --- | --- |
-| `PRT - 9040 - CAMTARXIA - V04` | chassis: rails and lands on -x, long flexure arms on +x, nose, square camera seat, funnel and hood, stepped board pocket, slot of the wedge key, USB-C channel, long stick with grip waist and stop shoulder | PETG, on the front face; arms lie in the layer plane; the 1.5 mm arms all walls, 4 walls elsewhere |
-| `PRT - 9041 - CAMTARCOV - V04` | back cover: dovetail, two spring tongues press the XIAO on its ledges, the slits are the vents, one M3 | PETG, on the back face |
+| `PRT - 9040 - CAMTARXIA - V04` | chassis: rails and lands on -x, long flexure arms on +x, nose, square camera seat, funnel and hood, stepped board pocket, slot of the wedge key, lens tube with jaw and lock screw, USB-C channel, long stick with grip waist and stop shoulder | PETG, on the front face; arms lie in the layer plane; the 1.5 mm arms all walls, 4 walls elsewhere |
+| `PRT - 9041 - CAMTARCOV - V04` | back cover: lies in a recess of the back (0.3 mm clearance per side), three M3 screws, two spring tongues press the XIAO on its ledges, the slits are the vents | PETG, on the back face |
 | `PRT - 9033 - CAMTARKEY - V04` | wedge key: flat front on the module, sloped back in the sloped slot (1:12) | PETG in a second colour, on its side, so the wedge face is a wall |
 | `PRT - 9034 - CAMTARSCR - V04` | screen cap: 0.6 mm white screen, target on the front for the eye, reticle on the inner face for the camera, ring that centres on the hood's cone, 2 magnets | white PETG, on the screen |
 | `PRT - 9035 - CAMTARNDF - V04` | ND cap for the bare chip: D12.7 filter up to 2.5 mm, tilted ~3.5 deg by a pad, same ring and magnets | PETG, on the front |
 | `ASS - 9039 - CAMTARXIA - V04` | seated in an ASS-2000 cube with a PUZ11 on top, entered from the top | |
 | `ASS - 9039 - ... - side entry` | the same turned 90 deg about the beam | |
 
-Bought: XIAO ESP32-S3 Sense, 6 x `BUY - NeFeB-Magnet - ø8x3 N40 Ni` (2 chassis, 2 per cap), M3 x 10 ISO 10642, Ruthex RX-M3Sx4.0,
+Bought: XIAO ESP32-S3 Sense, 6 x `BUY - NeFeB-Magnet - ø8x3 N40 Ni` (2 chassis, 2 per cap), 3 x M3 x 10 ISO 10642, 1 x M3 x 8 ISO 4762, 4 x Ruthex RX-M3Sx4.0,
 a USB-C cable with a slim plug (up to 12.4 x 6.6). PLA is not recommended: the arms run at 1.6 % strain and the board gets warm
 (the Sense board is known to run hot, the slits and the USB channel let the air through). On the Form 4 use Tough 2000, not Standard.
 
-## 4. How it locates
+## 3. How it locates
 
 All 12 inner edges of the cube carry the same 45 deg flat on |a| + |b| = 38.00 (measured). Behind every port the throat is only
 3.9 mm long; inside it the opening widens along that flat.
 
 - **Two rails on -x are rigid.** Each has a flat lying on a chamfer, 27 mm long, from y -15.1 to the front face. Together they are a V block that defines x and z, and the tilts about x and z.
-  They do **not** define the rotation about the beam (section 0).
-- **Two flexure arms on +x push and click.** Each pad ridge stands 1.2 mm past its seat in the corner of the +x chamfer and the throat wall when free. Seated they give 7.1 N each, 14.2 N into the V (estimate for PETG).
-- **Two lands on -x limit the roll**, near and far, one for each direction of rotation. The lands sit at z 21.65..23.4 and the same below: inside the throat of the top ports (21..24.9) and of the side ports (21..23.8).
+  They do **not** define the rotation about the beam: a contact on a 45 deg chamfer pushes almost through the axis (force lines 1.4 mm from it), so it cannot resist that rotation.
+- **Two flexure arms on +x push and click.** Each pad ridge stands 1.2 mm past its seat in the corner of the +x chamfer and the throat wall when free. Seated they give 7.1 N each, 14.2 N into the V; pushing in peaks at about 19 N, a straight pull starts at 24 N and peaks at 36 N (estimates for PETG, mu 0.25).
+  The ridges sit on the chamfer just below its corner with the throat wall, the only groove a cube has; that gives the click.
+- **Two lands on -x limit the roll**, near and far, one for each direction of rotation, with a lever of 22 mm. They stand 0.05-0.1 mm off the walls: stops, not locators. The rock of +-0.13 to 0.25 deg moves the image centre by about 0.01 mm. The lands sit at z 21.65..23.4 and the same below: inside the throat of the top ports (21..24.9) and of the side ports (21..23.8).
+- **Hard stop.** To go deeper than the seat the far rail must climb its chamfer, which moves the tool toward +x. The +x shoulder of the stick (x 16.1) then enters the near throat and meets the wall after 0.93 mm; the far rail (18.4 instead of 18.0) still bites 0.44 mm on its chamfer. Let go and the springs lift the tool back. On the way in the shoulder is still above the lip while the near rail needs the throat (shift 0.97 mm), and has 0.18 mm to spare in a puzzle piece.
+- **The stick** reaches z 70, +-16.1 wide, grip at z 57, 14 mm thick. Above z 31.5 the USB channel is open at the back. A long stick is a long lever: a rail lifts at 3.5 N (+x) / 6.7 N (-x) at the top and comes back when released, so let go of it for a measurement. `top_z` shortens it.
 - **Why not four springs.** Four balanced springs centre the tool only as well as friction lets them (about mu x spring travel, a few tenths of a mm
   here), and a cable pull of 1 N would move it by about 0.1 mm. A V with a spring stays on its contacts until the pull exceeds the preload.
 - **The rails do not fit the port.** They reach 18.0 (near) and 18.4 (far), the throat 17.03, so the tool shifts 1.0 to 1.4 mm sideways while a rail passes, and the arm on
@@ -117,11 +44,11 @@ All 12 inner edges of the cube carry the same 45 deg flat on |a| + |b| = 38.00 (
   changes nothing (the check sweeps both entries through both throats). The camera image turns with the tool; the mark for "up" on the reticle tells the software which way.
 - **Along the beam** only friction holds the tool. Its back reaches the throat's wall (0.23 mm clearance), which gives a defined position: push it away from the beam. It could slide up to 4.8 mm forward from there, which does not matter for a beam parallel to the axis.
 
-## 5. The camera no longer floats
+## 4. The camera does not float
 
-The module sits on a 10 mm flex in front of the microSD socket, with nothing behind it (vendor model: 0.2 to 3.7 mm of air). Rev B:
+The module sits on a 10 mm flex in front of the microSD socket, with nothing behind it (vendor model: 0.2 to 3.7 mm of air). So:
 
-- The square block of the module sits in a seat 8.2 x 8.2 and stops with its front on the seat floor.
+- The square block of the module sits in a seat 8.4 x 8.4 and stops with its front on the seat floor.
 - A wedge key is pushed in from the left side, into the gap between the module's back and the USB-C shell, above the Sense PCB. Its flat front lies on
   82 % of the module's back and presses it onto the seat floor. The lower edge stays free: the flex leaves there.
 - The key's sloped back runs on a sloped slot wall in the left and right walls of the chassis, so the clamping force goes into the chassis, not into the USB-C
@@ -129,9 +56,11 @@ The module sits on a 10 mm flex in front of the microSD socket, with nothing beh
 - The XIAO stack is held on its own: main PCB on the pocket floor (USB-C insertion) and under two shoulders (pulling a plug), Sense PCB on two ledges beside the socket, pressed
   there by the cover's tongues. Neither touches the module; the flex stays relaxed.
 
+Clearances are set for an FDM printer: 0.5 mm around the PCBs and connectors, 0.2 mm per side around the module, 0.15 mm around the key, 0.3 mm around the cover. The cover is screwed, three M3 into Ruthex inserts: two beside the USB channel at z 27, one in the nose at z -20.9.
+
 Cost: no microSD card in this tool (the key is where the card would be; the vendor model shows a card, which is the only overlap there). Streaming does not need it.
 
-## 6. Screen on magnets: yes
+## 5. Screen on magnets
 
 The screen stays the main mode and it stays magnetic, with four changes:
 
@@ -140,11 +69,11 @@ The screen stays the main mode and it stays magnetic, with four changes:
 3. **Keyed.** Top magnet N out on the chassis, bottom S out, the cap the opposite way: the wrong way round repels. Magnets sit 0.4 mm under each face, 0.9 mm apart: firm, still removable.
 4. **Reticle on the inner face**, one line wide, open inside r 1.5 so that it does not cut the beam's centre, with ticks at r 5 and a mark for up. The target on the front is for the eye.
 
-Optics as in rev A: lens ~1 mm unscrewed from infinity focus, screen 20 mm from the sensor, field 12 x 9 mm, all with the assumed f 3.5 mm.
-The bare chip works behind the ND cap: light reaches the sensor up to 31.7 deg (from a corner 18.6 to 35.7 deg, chassis only), and the filter is tilted so
-that its reflections leave the chip, as Bullseye's notes ask. Leave the glass on the sensor.
+**Lens outside the module.** The thread of the module does not let the lens come far enough forward for a screen this close, so the lens is unscrewed completely and held in front of the sensor, in a tube that stands free in the funnel. The bore is D6.9 for a lens of D6.32 (vendor model, please measure), from y -1 to y 5; the sensor is at y -4.5, so "4 mm in front" is y -0.5. The lens slides in the bore and a thin jaw on the -x side of the tube, between two slits, presses it against the far side, driven by an M3 x 8 through the left wall (thread insert, head in a recess, reachable through the cube's -x port). The jaw takes the screw's point away from the lens; if it cracks after many cycles it still clamps. With f 3.5 mm (assumed) sharp imaging of the screen needs the lens plane 4.52 mm from the sensor, 12 x 9 mm field; the slide covers the unknowns. The assembly shows the vendor's module with the lens in it.
 
-## 7. Using it, and how the 4 fold symmetry buys precision
+The bare chip works behind the ND cap, lens removed. The tube narrows its view: light reaches the sensor up to 20.2 deg (from a corner 8.6 to 35.7 deg, chassis only); a collimated beam does not care. The filter is tilted so that its reflections leave the chip. Leave the glass on the sensor.
+
+## 6. Using it, and how the 4 fold symmetry buys precision
 
 Printed parts land within maybe +-0.3 mm of the axis (rails +-0.1, seat +-0.1, sensor in its module +-0.1..0.2; estimates, nothing measured yet). The repeatability
 should be far better, and the symmetry lets the tool calibrate itself without a known beam:
@@ -159,15 +88,16 @@ For the beam's angle measure in two cubes along the path, like two irises, and w
 Assembly:
 
 1. Flash the firmware first: the buttons are out of reach afterwards.
-2. Glue the magnets, mind the poles. Press the Ruthex insert into the neck.
-3. Set the lens focus for the screen later, from the front, with the cap off.
+2. Glue the magnets, mind the poles. Press the four Ruthex inserts: three in the back, one in the recess in the left wall.
+3. Unscrew the lens completely from the module.
 4. Put the module into its seat from the back, lay the XIAO into the pocket. No microSD card.
 5. Push the key in from the left until it stops, firm, not hard. Lever it out at the notch.
-6. Slide the cover down from the top, one M3 x 10.
-7. Plug USB-C from the top, cap on, push the tool into an empty cube until it clicks.
-8. To take it out, hold the cube, tip the stick toward the arms by 1-2 deg (about 2 mm at the top, about 5 N, estimate; this lifts the near rail off its chamfer) and pull while it is tipped. A straight pull takes up to 36 N.
+6. Put the cover on, three M3 x 10.
+7. Slide the lens into the tube from the front, rear end about 4 mm in front of the sensor, lock it gently. Plug USB-C from the back of the stick, cap on, look at the live image; loosen, cap off, move the lens, repeat until the reticle is sharp.
+8. Push the tool into an empty cube until it clicks.
+9. To take it out, hold the cube, tip the stick toward the arms by 1-2 deg (about 2 mm at the top, about 5 N, estimate; this lifts the near rail off its chamfer) and pull while it is tipped. A straight pull takes up to 36 N.
 
-## 8. Measured facts (ASS-2000, STEP, this session)
+## 7. Measured facts (ASS-2000, STEP)
 
 | fact | value |
 | --- | --- |
@@ -178,26 +108,26 @@ Assembly:
 | behind the module | Sense PCB ends at z -3.05, USB-C shell front at y' -4.39: a 3.7 mm slot open to the sides and the top |
 | PUZ11 part frame | z -30..-25: origin at z 55 to lay it on a cube |
 
-## 9. Checks (rev D)
+## 8. Checks
 
 - Design checks (`xiao_target.py`): all pass. Flexure estimate: k 5.9 N/mm, strain 1.7 % through the throat.
-- Inventor interference, all pairs, both assemblies; every overlap classified: the two pads on the chamfers (85 mm3 top, 106 mm3 side, their preload, the parts are modelled as printed), thread insert in its hole, screw in the
-  insert, cover bumps on the main PCB (0.1 mm), key on the module's back (0.05 mm), and the microSD card that the vendor model shows (chassis and key). Nothing with the puzzle piece.
+- Inventor interference, all pairs, both assemblies; every overlap classified: the two pads on the chamfers (85 mm3 top, 106 mm3 side, their preload, the parts are modelled as printed), thread inserts in their holes, screws in their
+  inserts, cover bumps on the main PCB (0.1 mm), key on the module's back (0.05 mm), and the microSD card that the vendor model shows (chassis and key). Nothing with the puzzle piece.
 - STEP sampling (`check_xiao_target.py`): rail flats parallel to the real chamfers (contact 100 % near the tip, 69 % at the inner end where the notches cut it, top entry);
   seated from the top and from the side only the pads overlap the cube; land gaps on the real walls 0.099 mm (top) and 0.050 mm (side); pad ridges 1.20 mm past the real chamfer, chamfer under 75 % of the length from the top (the notches), 100 % from the side;
-  rigid parts pass both throats from the top with a puzzle piece and from the side, shift at most 1.4 mm, arms yield 2.9 mm; hard stop 0.9 mm past the seat, top and side; lens view of the 12 x 9 mm field clear;
+  rigid parts pass both throats from the top with a puzzle piece and from the side, shift at most 1.4 mm, arms yield 2.9 mm; hard stop 0.9 mm past the seat, top and side; lens view of the 12 x 9 mm field clear; a D6.32 lens slides the whole bore, the jaw is cut free, the lock screw's path is open;
   USB-C plug 12.4 x 6.6 clear up to the top; the key backs 82 % of the module.
-- Figures: `xiao_target_entry.png` (entry, seat, overshoot), `_section_y.png`, `_roll.png`, `_hero.png`, `_back.png`, `_iso.png`, `_side_entry.png`, `_parts.png`, `_section_x0.png`.
+- Figures: `xiao_target_entry.png` (entry, seat, overshoot), `_section_y.png`, `_lens.png`, `_roll.png`, `_hero.png`, `_back.png`, `_iso.png`, `_side_entry.png`, `_parts.png`, `_section_x0.png`.
 
-Not tested: nothing has been printed yet. Forces, strain, repeatability and the calibration are estimates. The moment calculation treats the lands as rigid and the arms as beams; printing decides.
+Printed once before the cover, clearance and lens changes: the seat and the snap fit work. Not tested: the screwed cover, the new clearances and the lens tube. Forces, repeatability and the calibration are estimates.
 
-Build: `python build_xiao_target.py --only chassis cover`. It runs in its own hidden Inventor and never attaches to the one in use.
+Build: `python build_xiao_target.py --only chassis cover key`. It runs in its own hidden Inventor and never attaches to the one in use.
 
-## 10. Open points
+## 9. Open points
 
-1. Print one chassis first: the port fit, the arms and the click are what a print decides. Knobs: `arm_t` (stiffness; 1.5 mm gives 8.7 N per arm, 45 N peak pull), `pad_over` (preload), `bar_half` (stop gap), `top_z` (stick length), `land_gap` (if a land stands on the wall and lifts a rail, raise it), `rail_tip` (1 mm shift), `seat_clr`.
-2. Lens focal length and sensor plane: please measure (assumed f 3.5, sensor 0.65 mm above the module's back). With the sensor elsewhere `screen_d` moves.
-3. Can your module's lens be unscrewed by 1 mm? If it is glued, the screen mode needs another distance.
-4. Does the real module back have components where the key presses? The vendor model is flat.
-5. Numbers 9030-9041 are provisional.
-6. If 36 N out is too much even with the rocking, a thumb tab on the near arm above the cube could lift the near pad by hand. Not built.
+1. Knobs for the next print: `arm_t` (stiffness; 1.5 mm gives 8.7 N per arm, 45 N peak pull), `pad_over` (preload), `bar_half` (stop gap), `top_z` (stick length), `land_gap` (if a land stands on the wall and lifts a rail, raise it), `clr_board`, `seat_clr`, `lens_hole_d`.
+2. Lens: please measure the barrel's diameter and length, and the distance that gives a sharp reticle. `lens_d` and `lens_f` are assumed; a loose fit is taken up by `lens_hole_d`.
+3. Focusing needs the cap off to move the lens and on to see the reticle. If that is too slow, a window or a screw drive for the lens is the next step.
+4. The module's seat now has 0.2 mm per side, which moves the sensor by up to 0.2 mm. The two-entry calibration in section 6 removes that and the lens's own offset.
+5. Does the real module back have components where the key presses? The vendor model is flat.
+6. Numbers 9033-9035, 9039-9041 are provisional.
